@@ -2,8 +2,10 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use Spatie\Permission\Middlewares\RoleMiddleware;
 use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\CategoryController;
+use App\Http\Controllers\API\FoodController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,13 +22,10 @@ Route::post('register', [AuthController::class, 'register']);
 Route::post('login', [AuthController::class, 'login']);
 
 Route::middleware('auth:api')->group(function () {
-    Route::middleware('role:admin')->group(function () {
-        Route::resources([
-            'categories' => CategoryController::class,
-        ]);
-    });
+    Route::post('logout', [AuthController::class, 'logout']);
 
-    Route::middleware('role:user')->group(function () {
-        Route::get('categories', [CategoryController::class, 'index']);
-    });
+    Route::resources([
+        'categories' => CategoryController::class,
+        'foods' => FoodController::class,
+    ]);
 });

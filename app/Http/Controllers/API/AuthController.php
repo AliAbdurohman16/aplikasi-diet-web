@@ -19,7 +19,7 @@ class AuthController extends Controller
             'gender' => 'required',
             'date_of_birth' => 'required',
             'work' => 'required',
-        ]);
+        ])->assignRole('user');
 
         if ($validator->fails()) {
             return response()->json($validator->errors(), 422);
@@ -58,5 +58,13 @@ class AuthController extends Controller
         } else {
             return response()->json(['error' => 'Unauthorised'], 401);
         }
+    }
+
+    public function logout(Request $request)
+    {
+        $user = $request->user();
+        $user->tokens()->delete();
+
+        return response()->json(['message' => 'Logged out successfully'], 200);
     }
 }

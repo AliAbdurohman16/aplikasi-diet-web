@@ -29,9 +29,52 @@ class CategoryController extends Controller
 
         $category = Category::create([
             'title' => $request->title,
-            'slug' => Str::slug($request->slug, '-'),
+            'slug' => Str::slug($request->title, '-'),
         ]);
 
         return response()->json($category, 201);
+    }
+
+    public function show($id)
+    {
+        $category = Category::find($id);
+
+        return response()->json($category, 200);
+    }
+
+    public function edit($id)
+    {
+        $category = Category::find($id);
+
+        return response()->json($category, 200);
+    }
+
+    public function update(Request $request, $id)
+    {
+        $category = Category::find($id);
+
+        $validator = Validator::make($request->all(), [
+            'title' => 'required|string|max:255',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 422);
+        }
+
+        $category->update([
+            'title' => $request->title,
+            'slug' => Str::slug($request->title, '-'),
+        ]);
+
+        return response()->json($category, 200);
+    }
+
+    public function destroy($id)
+    {
+        $category = Category::find($id);
+
+        $category->delete();
+
+        return response()->json(['message' => 'Category deleted successfully'], 200);
     }
 }

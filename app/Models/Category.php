@@ -10,4 +10,14 @@ class Category extends Model
     use HasFactory;
 
     protected $guarded = [];
+
+    public function foods()
+    {
+        return $this->hasMany(Food::class);
+    }
+
+    public function drinks()
+    {
+        return $this->hasMany(Drink::class);
+    }
 }

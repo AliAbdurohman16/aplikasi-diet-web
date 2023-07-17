@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Backend;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +14,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Auth::routes(['register' => false]);
+
+Route::middleware('role:admin')->group(function () {
+    Route::get('dashboard', [Backend\DashboardController::class, 'index'])->name('dashboard');
+    Route::resources([
+        'categories' => Backend\CategoryController::class,
+        'foods' => Backend\FoodController::class,
+        'drinks' => Backend\DrinkController::class,
+        'users' => Backend\UserController::class,
+        'profile' => Backend\ProfileController::class,
+        'change-password' => Backend\ChangePasswordController::class,
+    ]);
 });

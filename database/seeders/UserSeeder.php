@@ -21,7 +21,7 @@ class UserSeeder extends Seeder
             'password' => bcrypt('1234567890'),
             'gender' => 'Laki-laki',
             'date_of_birth' => '2002-02-02',
-            'work' => 'Software Engineer',
+            'work' => 'Admin',
         ]);
 
         $admin->assignRole('admin');
@@ -32,7 +32,7 @@ class UserSeeder extends Seeder
             'password' => bcrypt('1234567890'),
             'gender' => 'Laki-laki',
             'date_of_birth' => '2002-02-02',
-            'work' => 'Software Engineer',
+            'work' => 'Mahasiswa',
         ]);
 
         $user->assignRole('user');

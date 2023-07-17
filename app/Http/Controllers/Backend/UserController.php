@@ -29,19 +29,21 @@ class UserController extends Controller
         // validation
         $request->validate([
             'name' => 'required|max:255',
-            'telephone' => 'required|max:15',
             'email' => 'required|unique:users',
             'password' => 'required|min:8|confirmed',
-            'address' => 'required',
+            'date_of_birth' => 'required',
+            'gender' => 'required',
+            'work' => 'required',
         ]);
 
         // insert to tabel users
         User::create([
             'name' => $request->name,
-            'telephone' => $request->telephone,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'address' => $request->address,
+            'date_of_birth' => $request->date_of_birth,
+            'gender' => $request->gender,
+            'work' => $request->work,
         ]);
 
         return redirect('users')->with('message', 'Pelanggan berhasil ditambahkan!');
@@ -77,19 +79,21 @@ class UserController extends Controller
         // validation
         $request->validate([
             'name' => 'required|max:255',
-            'telephone' => 'required|max:15',
             'email' => $rules_email,
             'password' => $rules_password,
-            'address' => 'required',
+            'date_of_birth' => $request->date_of_birth,
+            'gender' => $request->gender,
+            'work' => $request->work,
         ]);
 
         // update to table
         $user->update([
             'name' => $request->name,
-            'telephone' => $request->telephone,
             'email' => $request->email,
             'password' => $request->password ? Hash::make($request->password) : $user->password,
-            'address' => $request->address,
+            'date_of_birth' => $request->date_of_birth,
+            'gender' => $request->gender,
+            'work' => $request->work,
         ]);
 
         return redirect('users')->with('message', 'Pelanggan berhasil diubah!');

@@ -10,24 +10,9 @@
             <li><a href="{{ route('categories.index') }}"><i class="uil uil-apps me-2"></i>Kategori</a></li>
             <li><a href="{{ route('foods.index') }}"><i class="uil uil-utensils me-2"></i>Makanan</a></li>
             <li><a href="{{ route('drinks.index') }}"><i class="uil uil-coffee me-2"></i>Minuman</a></li>
-            {{-- @if (Auth::user()->hasRole('admin'))
-            <li><a href="{{ route('packages.index') }}"><i class="uil uil-package me-2"></i>Paket</a></li>
-            @endif
-            <li class="sidebar-dropdown">
-                <a href="javascript:void(0)"><i class="uil uil-receipt me-2"></i>Booking</a>
-                <div class="sidebar-submenu">
-                    <ul>
-                        <li><a href="{{ route('booking_pending') }}">Booking Pending</a></li>
-                        <li><a href="{{ route('booking_success') }}">Booking Sukses</a></li>
-                        <li><a href="{{ route('booking_failed') }}">Booking Gagal</a></li>
-                    </ul>
-                </div>
-            </li>
-            @if (Auth::user()->hasRole('admin')) --}}
+            <li><a href="{{ route('drinks.index') }}"><i class="uil uil-dumbbell me-2"></i>Olahraga</a></li>
+            <li><a href="{{ route('drinks.index') }}"><i class="uil uil-comments me-2"></i>Konsultasi</a></li>
             <li><a href="{{ route('users.index') }}"><i class="uil uil-users-alt me-2"></i>Pengguna</a></li>
-            {{-- <li><a href="{{ route('payments.index') }}"><i class="uil uil-credit-card me-2"></i>Payment</a></li>
-            @endif
-            <li><a href="{{ route('reports') }}"><i class="uil uil-folder me-2"></i>Laporan</a></li> --}}
             <li class="sidebar-dropdown">
                 <a href="javascript:void(0)"><i class="uil uil-user me-2"></i>Akun</a>
                 <div class="sidebar-submenu">

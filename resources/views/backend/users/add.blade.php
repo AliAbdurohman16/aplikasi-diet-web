@@ -1,6 +1,6 @@
 @extends('layouts.backend.main')
 
-@section('title', 'Pengguna')
+@section('title', 'Tambah Data Pengguna')
 
 @section('css')
 <!-- Datatables -->
@@ -13,7 +13,7 @@
 <div class="container-fluid">
     <div class="layout-specing">
         <div class="d-md-flex justify-content-between align-items-center">
-            <h5 class="mb-0">Pengguna</h5>
+            <h5 class="mb-0">Tambah Data Pengguna</h5>
 
             <nav aria-label="breadcrumb" class="d-inline-block">
                 <ul class="breadcrumb bg-transparent rounded mb-0 p-0">
@@ -122,8 +122,8 @@
                                             <i data-feather="briefcase" class="fea icon-sm icons"></i>
                                             <select class="form-control ps-5 @error('work') is-invalid @enderror" name="work" id="work">
                                                 <option value="">-- Pilih Pekerjaan --</option>
-                                                <option value="Pelajar" {{ $request->old('key', 'default')('work') == 'Pelajar' ? 'selected' : '' }}>Pelajar</option>
-                                                <option value="Mahasiswa" {{ $request->old('key', 'default')('work') == 'Mahasiswa' ? 'selected' : '' }}>Mahasiswa</option>
+                                                <option value="Pelajar" {{ old('work') == 'Pelajar' ? 'selected' : '' }}>Pelajar</option>
+                                                <option value="Mahasiswa" {{ old('work') == 'Mahasiswa' ? 'selected' : '' }}>Mahasiswa</option>
                                             </select>
                                             @error('work')
                                                 <span class="invalid-feedback" role="alert">

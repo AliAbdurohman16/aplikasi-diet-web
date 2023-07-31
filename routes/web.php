@@ -20,8 +20,11 @@ Route::middleware('role:admin')->group(function () {
     Route::get('dashboard', [Backend\DashboardController::class, 'index'])->name('dashboard');
     Route::resources([
         'categories' => Backend\CategoryController::class,
+        'subcategories' => Backend\SubcategoryController::class,
         'foods' => Backend\FoodController::class,
         'drinks' => Backend\DrinkController::class,
+        'sports' => Backend\SportController::class,
+        'consultations' => Backend\ConsultationController::class,
         'users' => Backend\UserController::class,
         'profile' => Backend\ProfileController::class,
         'change-password' => Backend\ChangePasswordController::class,

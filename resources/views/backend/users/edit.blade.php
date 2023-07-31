@@ -1,6 +1,6 @@
 @extends('layouts.backend.main')
 
-@section('title', 'Pengguna')
+@section('title', 'Edit Data Pengguna')
 
 @section('css')
 <!-- Datatables -->
@@ -13,7 +13,7 @@
 <div class="container-fluid">
     <div class="layout-specing">
         <div class="d-md-flex justify-content-between align-items-center">
-            <h5 class="mb-0">Pengguna</h5>
+            <h5 class="mb-0">Edit Data Pengguna</h5>
 
             <nav aria-label="breadcrumb" class="d-inline-block">
                 <ul class="breadcrumb bg-transparent rounded mb-0 p-0">

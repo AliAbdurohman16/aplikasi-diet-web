@@ -36,4 +36,14 @@ class User extends Authenticatable
     protected $hidden = [
         'password',
     ];
+
+    public function sentChats()
+    {
+        return $this->hasMany(Chat::class, 'sender_id');
+    }
+
+    public function receivedChats()
+    {
+        return $this->hasMany(Chat::class, 'recipient_id');
+    }
 }

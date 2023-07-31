@@ -13,18 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('food', function (Blueprint $table) {
+        Schema::create('sports', function (Blueprint $table) {
             $table->id();
             $table->string('image');
             $table->string('name');
-            $table->unsignedBigInteger('category_id');
+            $table->string('duration');
             $table->string('calories');
-            $table->string('proteins');
-            $table->string('carbohydrate');
             $table->string('fat');
             $table->text('description');
             $table->timestamps();
-            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
         });
     }
 
@@ -35,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('food');
+        Schema::dropIfExists('sports');
     }
 };

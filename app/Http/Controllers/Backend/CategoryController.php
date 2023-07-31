@@ -13,9 +13,9 @@ class CategoryController extends Controller
     public function index()
     {
         // get data
-        $categories = Category::all();
+        $data['categories'] = Category::all();
 
-        return view('backend.categories.index', compact('categories'));
+        return view('backend.categories.index', $data);
     }
 
     public function store(Request $request)

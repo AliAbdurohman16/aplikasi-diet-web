@@ -13,18 +13,18 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('drink', function (Blueprint $table) {
+        Schema::create('drinks', function (Blueprint $table) {
             $table->id();
             $table->string('image');
             $table->string('name');
-            $table->unsignedBigInteger('category_id');
+            $table->unsignedBigInteger('subcategory_id');
             $table->string('calories');
             $table->string('proteins');
             $table->string('carbohydrate');
             $table->string('fat');
             $table->text('description');
             $table->timestamps();
-            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
+            $table->foreign('subcategory_id')->references('id')->on('subcategories')->onDelete('cascade');
         });
     }
 
@@ -35,6 +35,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('drink');
+        Schema::dropIfExists('drinks');
     }
 };

@@ -11,8 +11,8 @@ class Drink extends Model
 
     protected $guarded = [];
 
-    public function category()
+    public function subcategory()
     {
-        return $this->belongsTo(Category::class);
+        return $this->belongsTo(Subcategory::class);
     }
 }

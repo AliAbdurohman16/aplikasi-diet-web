@@ -1,6 +1,6 @@
 @extends('layouts.backend.main')
 
-@section('title', 'Tambah Data Makanan')
+@section('title', 'Tambah Data Minuman')
 
 @section('css')
 <link rel="stylesheet" href="{{ asset('backend') }}/libs/select2/select2.min.css"/>
@@ -12,28 +12,28 @@
 <div class="container-fluid">
     <div class="layout-specing">
         <div class="d-md-flex justify-content-between align-items-center">
-            <h5 class="mb-0">Tambah Data Makanan</h5>
+            <h5 class="mb-0">Tambah Data Minuman</h5>
 
             <nav aria-label="breadcrumb" class="d-inline-block">
                 <ul class="breadcrumb bg-transparent rounded mb-0 p-0">
-                    <li class="breadcrumb-item text-capitalize"><a href="{{ route('foods.index') }}">Makanan</a></li>
+                    <li class="breadcrumb-item text-capitalize"><a href="{{ route('drinks.index') }}">Minuman</a></li>
                     <li class="breadcrumb-item text-capitalize active" aria-current="page">Tambah Data</li>
                 </ul>
             </nav>
         </div>
 
-        <a href="{{ route('foods.index') }}" class="btn btn-warning btn-sm mt-4"><i class="fa-solid fa-arrow-left"></i> Kembali</a>
+        <a href="{{ route('drinks.index') }}" class="btn btn-warning btn-sm mt-4"><i class="fa-solid fa-arrow-left"></i> Kembali</a>
 
         <div class="col-lg-12 mt-4">
             <div class="card">
                 <div class="container">
                     <div class="card-body">
-                        <form action="{{ route('foods.store') }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('drinks.store') }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="row mt-4">
                                 <div class="col-md-6">
                                     <div class="mb-3">
-                                        <label class="form-label">Foto Makanan <span class="text-danger">*</span></label>
+                                        <label class="form-label">Foto Minuman <span class="text-danger">*</span></label>
                                         <div class="row">
                                             <div class="col-sm-3 mb-2">
                                                 <img src="{{ asset('default/image.png') }}" width="100px" alt="image" class="img-thumbnail img-preview">
@@ -51,8 +51,8 @@
                                 </div><!--end col-->
                                 <div class="col-md-6">
                                     <div class="mb-3">
-                                        <label class="form-label">Nama Makanan <span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control @error('name') is-invalid @enderror" placeholder="Nama Makanan" name="name" value="{{ old('name') }}" autocomplete="name">
+                                        <label class="form-label">Nama Minuman <span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control @error('name') is-invalid @enderror" placeholder="Nama Minuman" name="name" value="{{ old('name') }}" autocomplete="name">
                                         @error('name')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -145,8 +145,8 @@
                                 </div><!--end col-->
                                 <div class="col-md-12">
                                     <div class="mb-3">
-                                        <label class="form-label">Deskripsi Makanan  <span class="text-danger">*</span></label>
-                                        <textarea name="description" id="summernote" rows="4" class="form-control @error('description') is-invalid @enderror" placeholder="Deskripsi Makanan">{{ old('description') }}</textarea>
+                                        <label class="form-label">Deskripsi Minuman  <span class="text-danger">*</span></label>
+                                        <textarea name="description" id="summernote" rows="4" class="form-control @error('description') is-invalid @enderror" placeholder="Deskripsi Minuman">{{ old('description') }}</textarea>
                                         @error('description')
                                             <div class="invalid-feedback">
                                                 {{ $message }}

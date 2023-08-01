@@ -4,14 +4,14 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Food;
+use App\Models\Drink;
 
-class FoodController extends Controller
+class DrinkController extends Controller
 {
     public function index()
     {
-        $foods = Food::all();
+        $drinks = Drink::all();
 
-        return response()->json($foods, 200);
+        return response()->json($drinks, 200);
     }
 }

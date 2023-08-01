@@ -1,6 +1,6 @@
 @extends('layouts.backend.main')
 
-@section('title', 'Makanan')
+@section('title', 'Minuman')
 
 @section('css')
 <!-- Datatables -->
@@ -13,11 +13,11 @@
 <div class="container-fluid">
     <div class="layout-specing">
         <div class="d-md-flex justify-content-between align-items-center">
-            <h5 class="mb-0">Makanan</h5>
+            <h5 class="mb-0">Minuman</h5>
 
             <nav aria-label="breadcrumb" class="d-inline-block">
                 <ul class="breadcrumb bg-transparent rounded mb-0 p-0">
-                    <li class="breadcrumb-item text-capitalize"><a href="#">Makanan</a></li>
+                    <li class="breadcrumb-item text-capitalize"><a href="#">Minuman</a></li>
                     <li class="breadcrumb-item text-capitalize active" aria-current="page">list</li>
                 </ul>
             </nav>
@@ -26,7 +26,7 @@
         <div class="row">
             <div class="col-12 mt-4">
                 <div class="d-grid gap-2 d-md-flex">
-                    <a href="{{ route('foods.create') }}" class="btn btn-primary mb-3 btn-sm">
+                    <a href="{{ route('drinks.create') }}" class="btn btn-primary mb-3 btn-sm">
                         Tambah Data +
                     </a>
                 </div>
@@ -48,19 +48,19 @@
                             </thead>
                             <tbody>
                                 <!-- Start -->
-                                @foreach($foods as $food)
+                                @foreach($drinks as $drink)
                                     <tr>
                                         <th class="text-center p-3" style="width: 5%;">{{ $loop->iteration }}</th>
-                                        <td class="p-3"><img src="{{ asset('storage/foods/' . $food->image) }}" width="70px" class="img-fluid" alt="image-categories"></td>
-                                        <td class="p-3">{{ $food->name }}</td>
-                                        <td class="p-3">{{ $food->subcategory->name }}</td>
-                                        <td class="p-3">{{ $food->calories }} gram</td>
-                                        <td class="p-3">{{ $food->proteins }} gram</td>
-                                        <td class="p-3">{{ $food->carbohydrate }} gram</td>
-                                        <td class="p-3">{{ $food->fat }} gram</td>
+                                        <td class="p-3"><img src="{{ asset('storage/drinks/' . $drink->image) }}" width="70px" class="img-fluid" alt="image-categories"></td>
+                                        <td class="p-3">{{ $drink->name }}</td>
+                                        <td class="p-3">{{ $drink->subcategory->name }}</td>
+                                        <td class="p-3">{{ $drink->calories }} gram</td>
+                                        <td class="p-3">{{ $drink->proteins }} gram</td>
+                                        <td class="p-3">{{ $drink->carbohydrate }} gram</td>
+                                        <td class="p-3">{{ $drink->fat }} gram</td>
                                         <td style="width: 25%;">
-                                            <a href="foods/{{ $food->id }}/edit" class="btn btn-warning btn-sm mb-2"><i class="fa-solid fa-pen"></i> Edit</a>
-                                            <button type="button" class="btn btn-danger btn-sm mb-2 btn-delete" data-id="{{ $food->id }}"><i class="fa-solid fa-trash"></i> Hapus</button>
+                                            <a href="drinks/{{ $drink->id }}/edit" class="btn btn-warning btn-sm mb-2"><i class="fa-solid fa-pen"></i> Edit</a>
+                                            <button type="button" class="btn btn-danger btn-sm mb-2 btn-delete" data-id="{{ $drink->id }}"><i class="fa-solid fa-trash"></i> Hapus</button>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -118,7 +118,7 @@
         }).then((result) => {
             if (result.isConfirmed) {
                 $.ajax({
-                    url: "foods/" + id,
+                    url: "drinks/" + id,
                     type: 'DELETE',
                     data: {
                         "id": id,

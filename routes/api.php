@@ -26,6 +26,8 @@ Route::middleware('auth:api')->group(function () {
 
     Route::resources([
         'categories' => CategoryController::class,
+        'subcategories' => SubcategoryController::class,
         'foods' => FoodController::class,
+        'drinks' => DrinkController::class,
     ]);
 });

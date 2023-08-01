@@ -29,5 +29,6 @@ Route::middleware('auth:api')->group(function () {
         'subcategories' => SubcategoryController::class,
         'foods' => FoodController::class,
         'drinks' => DrinkController::class,
+        'sports' => SportController::class,
     ]);
 });

@@ -24,6 +24,7 @@ Route::middleware('role:admin')->group(function () {
         'foods' => Backend\FoodController::class,
         'drinks' => Backend\DrinkController::class,
         'sports' => Backend\SportController::class,
+        'educations' => Backend\EducationController::class,
         'consultations' => Backend\ConsultationController::class,
         'users' => Backend\UserController::class,
         'profile' => Backend\ProfileController::class,

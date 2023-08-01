@@ -17,7 +17,9 @@ return new class extends Migration
             $table->id();
             $table->string('image');
             $table->string('name');
-            $table->string('duration');
+            $table->string('set');
+            $table->string('time');
+            $table->string('per');
             $table->string('calories');
             $table->string('fat');
             $table->text('description');

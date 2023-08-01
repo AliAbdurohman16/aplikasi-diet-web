@@ -3,9 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Spatie\Permission\Middlewares\RoleMiddleware;
-use App\Http\Controllers\API\AuthController;
-use App\Http\Controllers\API\CategoryController;
-use App\Http\Controllers\API\FoodController;
+use App\Http\Controllers\API;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,17 +16,15 @@ use App\Http\Controllers\API\FoodController;
 |
 */
 
-Route::post('register', [AuthController::class, 'register']);
-Route::post('login', [AuthController::class, 'login']);
+Route::post('register', [API\AuthController::class, 'register']);
+Route::post('login', [API\AuthController::class, 'login']);
 
 Route::middleware('auth:api')->group(function () {
-    Route::post('logout', [AuthController::class, 'logout']);
-
-    Route::resources([
-        'categories' => CategoryController::class,
-        'subcategories' => SubcategoryController::class,
-        'foods' => FoodController::class,
-        'drinks' => DrinkController::class,
-        'sports' => SportController::class,
-    ]);
+    Route::post('logout', [API\AuthController::class, 'logout']);
+    Route::get('categories', [API\CategoryController::class, 'index']);
+    Route::get('subcategories', [API\SubcategoryController::class, 'index']);
+    Route::get('foods', [API\FoodController::class, 'index']);
+    Route::get('drinks', [API\DrinkController::class, 'index']);
+    Route::get('sports', [API\SportController::class, 'index']);
+    Route::get('educations', [API\EducationController::class, 'index']);
 });

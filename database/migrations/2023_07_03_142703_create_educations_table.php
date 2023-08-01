@@ -13,10 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('educational_videos', function (Blueprint $table) {
+        Schema::create('educations', function (Blueprint $table) {
             $table->id();
+            $table->string('thumbnail');
             $table->string('title');
-            $table->string('link');
+            $table->text('link');
+            $table->text('description');
             $table->timestamps();
         });
     }
@@ -28,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('educational_videos');
+        Schema::dropIfExists('educations');
     }
 };

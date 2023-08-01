@@ -19,6 +19,7 @@
             <li><a href="{{ route('foods.index') }}"><i class="uil uil-utensils me-2"></i>Makanan</a></li>
             <li><a href="{{ route('drinks.index') }}"><i class="uil uil-coffee me-2"></i>Minuman</a></li>
             <li><a href="{{ route('sports.index') }}"><i class="uil uil-dumbbell me-2"></i>Olahraga</a></li>
+            <li><a href="{{ route('educations.index') }}"><i class="uil uil-video me-2"></i>Edukasi</a></li>
             <li><a href="{{ route('consultations.index') }}"><i class="uil uil-comments me-2"></i>Konsultasi</a></li>
             <li><a href="{{ route('users.index') }}"><i class="uil uil-users-alt me-2"></i>Pengguna</a></li>
             <li class="sidebar-dropdown">

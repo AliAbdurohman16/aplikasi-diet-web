@@ -34,7 +34,7 @@ class AuthController extends Controller
             'work' => $request->work,
         ]);
 
-        $token = $user->createToken('AuthApp')->accessToken;
+        $token = $user->createToken('AuthApp')->plainTextToken;
 
         return response()->json(['token' => $token], 201);
     }
@@ -53,8 +53,16 @@ class AuthController extends Controller
         $credentials = $request->only('email', 'password');
 
         if (Auth::attempt($credentials)) {
-            $token = Auth::user()->createToken('AuthApp')->accessToken;
-            return response()->json(['token' => $token], 200);
+//            $token = Auth::user()->createToken('AuthApp')->accessToken;
+            // retrieve latest user from credentials
+            $user = User::where('email', $request->email)->first();
+
+            //displaying token for issue
+            $token = $user->createToken('AuthApp')->plainTextToken;
+            return response()->json(['access_token' => $token,
+                'token_type' => 'Bearer',
+                'user' => $user,
+            ], 200);
         } else {
             return response()->json(['error' => 'Unauthorised'], 401);
         }

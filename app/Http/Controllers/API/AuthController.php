@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Validator;
 
+
 class AuthController extends Controller
 {
     public function register(Request $request)
@@ -19,7 +20,7 @@ class AuthController extends Controller
             'gender' => 'required',
             'date_of_birth' => 'required',
             'work' => 'required',
-        ])->assignRole('user');
+        ]);
 
         if ($validator->fails()) {
             return response()->json($validator->errors(), 422);
@@ -32,11 +33,11 @@ class AuthController extends Controller
             'gender' => $request->gender,
             'date_of_birth' => $request->date_of_birth,
             'work' => $request->work,
-        ]);
+        ])->assignRole('user');
 
         $token = $user->createToken('AuthApp')->plainTextToken;
 
-        return response()->json(['token' => $token], 201);
+        return response()->json(['token' => $token, 'token_type' => 'Bearer', 'user' => $user], 201);
     }
 
     public function login(Request $request)

@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\API\DrinkController;
+use App\Http\Controllers\API\SubcategoryController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Spatie\Permission\Middlewares\RoleMiddleware;
@@ -21,7 +23,7 @@ use App\Http\Controllers\API\FoodController;
 Route::post('register', [AuthController::class, 'register']);
 Route::post('login', [AuthController::class, 'login']);
 
-Route::middleware('auth:api')->group(function () {
+Route::middleware('auth:sanctum')->group(function () {
     Route::post('logout', [AuthController::class, 'logout']);
 
     Route::resources([

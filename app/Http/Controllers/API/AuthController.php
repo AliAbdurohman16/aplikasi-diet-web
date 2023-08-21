@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Validator;
 
+
 class AuthController extends Controller
 {
     public function register(Request $request)
@@ -19,7 +20,7 @@ class AuthController extends Controller
             'gender' => 'required',
             'date_of_birth' => 'required',
             'work' => 'required',
-        ])->assignRole('user');
+        ]);
 
         if ($validator->fails()) {
             return response()->json($validator->errors(), 422);
@@ -32,11 +33,11 @@ class AuthController extends Controller
             'gender' => $request->gender,
             'date_of_birth' => $request->date_of_birth,
             'work' => $request->work,
-        ]);
+        ])->assignRole('user');
 
-        $token = $user->createToken('AuthApp')->accessToken;
+        $token = $user->createToken('AuthApp')->plainTextToken;
 
-        return response()->json(['token' => $token], 201);
+        return response()->json(['token' => $token, 'token_type' => 'Bearer', 'user' => $user], 201);
     }
 
     public function login(Request $request)
@@ -53,8 +54,16 @@ class AuthController extends Controller
         $credentials = $request->only('email', 'password');
 
         if (Auth::attempt($credentials)) {
-            $token = Auth::user()->createToken('AuthApp')->accessToken;
-            return response()->json(['token' => $token], 200);
+//            $token = Auth::user()->createToken('AuthApp')->accessToken;
+            // retrieve latest user from credentials
+            $user = User::where('email', $request->email)->first();
+
+            //displaying token for issue
+            $token = $user->createToken('AuthApp')->plainTextToken;
+            return response()->json(['access_token' => $token,
+                'token_type' => 'Bearer',
+                'user' => $user,
+            ], 200);
         } else {
             return response()->json(['error' => 'Unauthorised'], 401);
         }

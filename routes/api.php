@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\API\DrinkController;
+use App\Http\Controllers\API\SubcategoryController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Spatie\Permission\Middlewares\RoleMiddleware;
@@ -20,11 +22,12 @@ Route::post('register', [API\AuthController::class, 'register']);
 Route::post('login', [API\AuthController::class, 'login']);
 
 Route::middleware('auth:api')->group(function () {
-    Route::post('logout', [API\AuthController::class, 'logout']);
-    Route::get('categories', [API\CategoryController::class, 'index']);
-    Route::get('subcategories', [API\SubcategoryController::class, 'index']);
-    Route::get('foods', [API\FoodController::class, 'index']);
-    Route::get('drinks', [API\DrinkController::class, 'index']);
-    Route::get('sports', [API\SportController::class, 'index']);
-    Route::get('educations', [API\EducationController::class, 'index']);
+    Route::post('logout', [AuthController::class, 'logout']);
+
+    Route::resources([
+        'categories' => CategoryController::class,
+        'subcategories' => SubcategoryController::class,
+        'foods' => FoodController::class,
+        'drinks' => DrinkController::class,
+    ]);
 });

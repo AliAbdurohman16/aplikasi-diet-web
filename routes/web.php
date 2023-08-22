@@ -31,3 +31,8 @@ Route::middleware('role:admin')->group(function () {
         'change-password' => Backend\ChangePasswordController::class,
     ]);
 });
+
+Route::get('/passport', function () {
+    \Illuminate\Support\Facades\Artisan::call('passport:install');
+    echo 'generated';
+});

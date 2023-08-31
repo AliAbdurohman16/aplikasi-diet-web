@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Helpers\ResponseFormatter;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
@@ -37,7 +38,11 @@ class AuthController extends Controller
 
         $token = $user->createToken('AuthApp')->plainTextToken;
 
-        return response()->json(['token' => $token, 'token_type' => 'Bearer', 'user' => $user], 201);
+        return ResponseFormatter::success([
+            'token' => $token,
+            'token_type' => 'Bearer',
+            'user' => $user,
+        ], 'Berhasil Mendaftar');
     }
 
     public function login(Request $request)
@@ -54,18 +59,19 @@ class AuthController extends Controller
         $credentials = $request->only('email', 'password');
 
         if (Auth::attempt($credentials)) {
-//            $token = Auth::user()->createToken('AuthApp')->accessToken;
+            //            $token = Auth::user()->createToken('AuthApp')->accessToken;
             // retrieve latest user from credentials
             $user = User::where('email', $request->email)->first();
 
             //displaying token for issue
             $token = $user->createToken('AuthApp')->plainTextToken;
-            return response()->json(['access_token' => $token,
+            return ResponseFormatter::success([
+                'token' => $token,
                 'token_type' => 'Bearer',
                 'user' => $user,
-            ], 200);
+            ], 'Authtenticated Success');
         } else {
-            return response()->json(['error' => 'Unauthorised'], 401);
+            return ResponseFormatter::error(['message' => 'Failed Authenticated'], 'Auth Fail', 500);
         }
     }
 

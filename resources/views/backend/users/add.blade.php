@@ -30,8 +30,8 @@
                                         <label class="form-label">Nama Lengkap <span class="text-danger">*</span></label>
                                         <div class="form-icon position-relative">
                                             <i data-feather="user" class="fea icon-sm icons"></i>
-                                            <input type="text" class="form-control ps-5 @error('fullname') is-invalid @enderror" placeholder="Nama Lengkap" name="fullname" value="{{ old('fullname') }}" autocomplete="fullname">
-                                            @error('fullname')
+                                            <input type="text" class="form-control ps-5 @error('name') is-invalid @enderror" placeholder="Nama Lengkap" name="name" value="{{ old('name') }}" autocomplete="name">
+                                            @error('name')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
                                                 </span>

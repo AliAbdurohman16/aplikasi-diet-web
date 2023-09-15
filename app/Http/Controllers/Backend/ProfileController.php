@@ -32,7 +32,7 @@ class ProfileController extends Controller
         // validation
         $request->validate([
             'image' => 'mimes:jpg,png,jpeg|image|max:2048',
-            'fullname' => 'required',
+            'name' => 'required',
             'email' => $rules,
             'date_of_birth' => 'required',
             'gender' => 'required',
@@ -54,7 +54,7 @@ class ProfileController extends Controller
         // update to table
         $profile->update([
             'image' => $imageName,
-            'fullname' => $request->fullname,
+            'name' => $request->name,
             'email' => $request->email,
             'date_of_birth' => $request->date_of_birth,
             'gender' => $request->gender

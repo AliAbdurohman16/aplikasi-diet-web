@@ -57,7 +57,7 @@
                                                 <img src="{{ asset('storage/users/' . $user->image) }}" width="70px" class="img-fluid" alt="image-customers">
                                             @endif
                                         </td>
-                                        <td class="p-3">{{ $user->fullname }}</td>
+                                        <td class="p-3">{{ $user->name }}</td>
                                         <td class="p-3">{{ $user->email }}</td>
                                         <td class="p-3">{{ date('d-m-Y', strtotime($user->date_of_birth)) }}</td>
                                         <td class="p-3">{{ $user->gender }}</td>

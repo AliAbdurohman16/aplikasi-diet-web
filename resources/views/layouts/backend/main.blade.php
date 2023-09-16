@@ -57,7 +57,7 @@
         <script src="{{ asset('backend') }}/libs/feather-icons/feather.min.js"></script>
         <script src="{{ asset('backend') }}/libs/simplebar/simplebar.min.js"></script>
         <!-- Fontawesome -->
-        <script src="{{ asset('backend') }}/libs/fontawesome/js/all.min.css"></script>
+        <script src="{{ asset('backend') }}/libs/fontawesome/js/all.min.js"></script>
         @yield('javascript')
         <!-- Main Js -->
         <script src="{{ asset('backend') }}/js/plugins.init.js"></script>

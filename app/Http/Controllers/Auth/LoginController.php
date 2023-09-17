@@ -29,9 +29,7 @@ class LoginController extends Controller
      */
     protected function redirectTo()
     {
-        // if (Auth::user()->hasRole('admin')) {
-            return RouteServiceProvider::DASHBOARD;
-        // }
+        return RouteServiceProvider::DASHBOARD;
     }
 
     /**
@@ -44,9 +42,28 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
-    public function logout()
+    protected function authenticated(Request $request, $user)
     {
-        Auth::logout();
-        return redirect()->route('login');
+        // Set user status to online
+        $this->setUserOnlineStatus($user->id, 1);
+    }
+
+    protected function logout(Request $request)
+    {
+        // Set user status to offline
+        if (Auth::check()) {
+            $this->setUserOnlineStatus(Auth::id(), 0);
+        }
+
+        $this->guard()->logout();
+
+        $request->session()->invalidate();
+
+        return $this->loggedOut($request) ?: redirect('/');
+    }
+
+    protected function setUserOnlineStatus($userId, $status)
+    {
+        User::where('id', $userId)->update(['is_online' => $status]);
     }
 }

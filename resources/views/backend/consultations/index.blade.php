@@ -67,7 +67,7 @@
         });
     });
 
-    // Fungsi untuk memuat data obrolan
+    // Function to load chat data
     function loadChatData() {
         setInterval(function() {
             $.ajax({
@@ -105,10 +105,10 @@
                 url: "{{ route('consultations.content', ':id') }}".replace(':id', userId),
                 dataType: "json",
                 success: function(response) {
-                    // Bandingkan konten chat yang diterima dengan konten chat saat ini
+                    // Compare the received chat content with the current chat content
                     var currentContent = $('#chat-ul').html();
                     if (response.content !== currentContent) {
-                        // Jika ada pembaruan, perbarui konten chat dan gulir ke bawah
+                        // If there is an update, update the chat content and scroll down
                         $('#chat-ul').html(response.content);
                         var contentChat = $(".content-chat")[0];
                         contentChat.scrollTop = contentChat.scrollHeight - contentChat.clientHeight;
@@ -132,7 +132,7 @@
                 var contentChat = $(".content-chat")[0];
                 contentChat.scrollTop = contentChat.scrollHeight - contentChat.clientHeight;
 
-                // Mulai polling untuk memeriksa pembaruan setiap beberapa detik (misalnya, 5 detik)
+                // Start polling to check for updates every few seconds (for example, 5 seconds)
                 startChatPolling(userId);
             },
             error: function(xhr, ajaxOptions, thrownError) {

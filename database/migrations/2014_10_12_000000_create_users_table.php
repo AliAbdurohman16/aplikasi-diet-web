@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('gender');
             $table->date('date_of_birth');
             $table->string('work');
+            $table->integer('is_online')->default(0);
             $table->timestamps();
         });
     }

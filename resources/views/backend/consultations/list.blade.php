@@ -26,7 +26,7 @@
                 <div class="d-flex justify-content-between">
                     <h6 class="text-dark mb-0 d-block">{{ $list->sender->name }}</h6>
     @endif
-                    <small class="text-muted">{{ $list->created_at->locale('id')->diffForHumans(['short' => true, 'syntax' => false]) }}</small>
+                    <small class="text-muted">{{ str_replace(' yang lalu', '', \Illuminate\Support\Carbon::parse($list->created_at)->locale('id')->shortRelativeDiffForHumans()) }}</small>
                 </div>
                 <div class="justify-content-between">
                     @php

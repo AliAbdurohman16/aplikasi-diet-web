@@ -47,6 +47,7 @@
 @endsection
 
 @section('javascript')
+<script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
 <script>
     $(document).ready(function() {
         listChat();
@@ -66,6 +67,22 @@
         });
     });
 
+    // Fungsi untuk memuat data obrolan
+    function loadChatData() {
+        setInterval(function() {
+            $.ajax({
+                url: "{{ route('consultations.list') }}",
+                dataType: "json",
+                success: function(response) {
+                    $('#list').html(response.listView);
+                },
+                error: function(xhr, ajaxOptions, thrownError) {
+                    alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError);
+                }
+            });
+        }, 5000);
+    }
+
     function listChat()
     {
         $.ajax({
@@ -73,11 +90,35 @@
             dataType: "json",
             success: function(response) {
                 $('#list').html(response.listView);
+
+                loadChatData();
             },
             error: function(xhr, ajaxOptions, thrownError) {
                 alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError);
             }
         });
+    }
+
+    function startChatPolling(userId) {
+        setInterval(function() {
+            $.ajax({
+                url: "{{ route('consultations.content', ':id') }}".replace(':id', userId),
+                dataType: "json",
+                success: function(response) {
+                    // Bandingkan konten chat yang diterima dengan konten chat saat ini
+                    var currentContent = $('#chat-ul').html();
+                    if (response.content !== currentContent) {
+                        // Jika ada pembaruan, perbarui konten chat dan gulir ke bawah
+                        $('#chat-ul').html(response.content);
+                        var contentChat = $(".content-chat")[0];
+                        contentChat.scrollTop = contentChat.scrollHeight - contentChat.clientHeight;
+                    }
+                },
+                error: function(xhr, ajaxOptions, thrownError) {
+                    alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError);
+                }
+            });
+        }, 5000);
     }
 
     function contentChat(userId) {
@@ -90,6 +131,9 @@
                 // Scroll to the bottom of .content-chat
                 var contentChat = $(".content-chat")[0];
                 contentChat.scrollTop = contentChat.scrollHeight - contentChat.clientHeight;
+
+                // Mulai polling untuk memeriksa pembaruan setiap beberapa detik (misalnya, 5 detik)
+                startChatPolling(userId);
             },
             error: function(xhr, ajaxOptions, thrownError) {
                 alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError);
@@ -115,6 +159,8 @@
                 chatPersonElement.innerHTML = xhr.responseText;
 
                 contentChat(userId);
+
+                listChat()
 
                 $('#delete-all').click(function() {
                     var senderId = $(this).data('sender-id');

@@ -2,6 +2,11 @@
 
 @section('title', 'Konsultasi')
 
+@section('css')
+<!-- Emojionearea -->
+<link rel="stylesheet" href="{{ asset('backend') }}/libs/emojionearea/dist/emojionearea.min.css"/>
+@endsection
+
 @section('content')
 <div class="container-fluid">
     <div class="layout-specing">
@@ -47,7 +52,8 @@
 @endsection
 
 @section('javascript')
-<script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
+<!-- Emojionearea -->
+<script src="{{ asset('backend') }}/libs/emojionearea/dist/emojionearea.min.js"></script>
 <script>
     $(document).ready(function() {
         listChat();
@@ -160,6 +166,8 @@
 
                 contentChat(userId);
 
+                // $("#chat-message").emojioneArea();
+
                 listChat()
 
                 $('#delete-all').click(function() {
@@ -203,8 +211,8 @@
     });
 
     function send() {
-        var message = document.getElementById("chat-message").value;
-        var recipient = document.getElementById("recipient").value;
+        var message = $("#chat-message").val();
+        var recipient = $("#recipient").val();
 
         $.ajax({
             url: "{{ route('consultations.send') }}",

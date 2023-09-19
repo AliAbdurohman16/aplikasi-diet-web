@@ -155,24 +155,44 @@
         const url = "{{ route('consultations.person', ':id') }}";
         const redirectUrl = url.replace(':id', userId);
 
-        const xhr = new XMLHttpRequest();
-        xhr.open('GET', redirectUrl, true);
-
-        xhr.onreadystatechange = function() {
-            if (xhr.readyState === 4 && xhr.status === 200) {
+        $.ajax({
+            url: redirectUrl,
+            type: "GET",
+            dataType: "html", // Change the data type as needed
+            success: function(response) {
                 // Get the chat-person element and update its content
                 const chatPersonElement = document.getElementById("chat-person");
-                chatPersonElement.innerHTML = xhr.responseText;
+                chatPersonElement.innerHTML = response;
+
+                // Initialize EmojiOne Area
+                let message = '';
+
+                $("#chat-message").emojioneArea({
+                    search: false,
+                    tones: false,
+                    events: {
+                        keyup: function(button, e) {
+                            message = this.getText();
+                            if (e.keyCode == 13 && !e.shiftKey) {
+                                send(message);
+                                this.setText('');
+                            }
+                        }
+                    }
+                });
+
+                $('#send-message').click(function(e) {
+                    e.preventDefault();
+                    console.log(message);
+                    // send(message);
+                });
 
                 contentChat(userId);
-
-                // $("#chat-message").emojioneArea();
-
-                listChat()
+                listChat();
 
                 $('#delete-all').click(function() {
                     var senderId = $(this).data('sender-id');
-                    var recipient = document.getElementById("recipient").value;
+                    var recipient = $("#recipient").val();
 
                     $.ajax({
                         url: "{{ route('consultations.delete-all') }}",
@@ -184,34 +204,21 @@
                         },
                         success: function(response) {
                             $('#chat-ul').empty();
-
-                            listChat()
+                            listChat();
                         },
                         error: function(jqXHR, textStatus, errorThrown) {
                             console.log(textStatus, errorThrown);
                         }
                     });
                 });
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                console.log(textStatus, errorThrown);
             }
-        };
-
-        xhr.send();
+        });
     }
 
-    $(document.body).on('keyup', '#chat-message', function(event) {
-        if (event.keyCode === 13) {
-            event.preventDefault();
-            send();
-        }
-    });
-
-    $('#send-message').click(function(event) {
-        event.preventDefault();
-        send();
-    });
-
-    function send() {
-        var message = $("#chat-message").val();
+    function send(message) {
         var recipient = $("#recipient").val();
 
         $.ajax({
@@ -225,8 +232,6 @@
             dataType: "json",
             success: function(response) {
                 contentChat(recipient);
-
-                $("#chat-message").val("");
 
                 const chatLinks = document.querySelectorAll('.chat-list');
                 chatLinks.forEach(link => {

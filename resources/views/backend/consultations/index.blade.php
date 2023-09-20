@@ -165,7 +165,7 @@
                 chatPersonElement.innerHTML = response;
 
                 // Initialize Emoji One Area
-                let $emojiArea = $("#chat-message").emojioneArea({
+                let emojiArea = $("#chat-message").emojioneArea({
                     search: false,
                     tones: false,
                     events: {
@@ -180,9 +180,9 @@
 
                 $('#send-message').click(function(e) {
                     e.preventDefault();
-                    let message = $emojiArea[0].emojioneArea.getText();
+                    let message = emojiArea[0].emojioneArea.getText();
                     send(message);
-                    $emojiArea[0].emojioneArea.setText('');
+                    emojiArea[0].emojioneArea.setText('');
                 });
 
                 contentChat(userId);

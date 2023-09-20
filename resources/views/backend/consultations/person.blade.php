@@ -27,14 +27,18 @@
         <ul class="p-4 list-unstyled chat" id="chat-ul" data-simplebar></ul>
     </div>
 
-    <div class="p-2 rounded-bottom shadow">
+    <div class="p-2 rounded-bottom shadow pb-0">
         <div class="row g-2">
-            <div class="col">
+            <div class="col" style="margin-top: 9px">
                 <input type="hidden" id="recipient" value="{{ $recipient->id }}">
                 <input type="text" class="form-control border" id="chat-message" style="height: 36px;" placeholder="Tuliskan Pesan...">
             </div>
             <div class="col-auto">
                 <button class="btn btn-icon btn-primary" id="send-message"><i class="ti ti-send"></i></button>
+            </div>
+            <div class="col-auto">
+                <label for="file-upload" class="btn btn-icon btn-primary"><i class="ti ti-paperclip"></i></label>
+                <input type="file" id="file-upload" name="attachment" accept="image/*" style="display: none;">
             </div>
         </div>
     </div>

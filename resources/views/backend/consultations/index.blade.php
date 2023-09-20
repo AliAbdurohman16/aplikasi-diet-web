@@ -164,17 +164,14 @@
                 const chatPersonElement = document.getElementById("chat-person");
                 chatPersonElement.innerHTML = response;
 
-                // Initialize EmojiOne Area
-                let message = '';
-
-                $("#chat-message").emojioneArea({
+                // Initialize Emoji One Area
+                let $emojiArea = $("#chat-message").emojioneArea({
                     search: false,
                     tones: false,
                     events: {
                         keyup: function(button, e) {
-                            message = this.getText();
                             if (e.keyCode == 13 && !e.shiftKey) {
-                                send(message);
+                                send(this.getText());
                                 this.setText('');
                             }
                         }
@@ -183,8 +180,9 @@
 
                 $('#send-message').click(function(e) {
                     e.preventDefault();
-                    console.log(message);
-                    // send(message);
+                    let message = $emojiArea[0].emojioneArea.getText();
+                    send(message);
+                    $emojiArea[0].emojioneArea.setText('');
                 });
 
                 contentChat(userId);

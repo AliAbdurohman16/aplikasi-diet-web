@@ -171,8 +171,11 @@
                     events: {
                         keyup: function(button, e) {
                             if (e.keyCode == 13 && !e.shiftKey) {
-                                send(this.getText());
-                                this.setText('');
+                                let message = this.getText();
+                                if (message.trim() !== '') {
+                                    send(message);
+                                    this.setText('');
+                                }
                             }
                         }
                     }
@@ -181,8 +184,10 @@
                 $('#send-message').click(function(e) {
                     e.preventDefault();
                     let message = emojiArea[0].emojioneArea.getText();
-                    send(message);
-                    emojiArea[0].emojioneArea.setText('');
+                    if (message.trim() !== '') {
+                        send(message);
+                        emojiArea[0].emojioneArea.setText('');
+                    }
                 });
 
                 contentChat(userId);

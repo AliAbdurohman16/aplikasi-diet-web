@@ -3,7 +3,7 @@
 
     <head>
         <meta charset="utf-8" />
-        <title>@yield('title') - Aplikasi Diet</title>
+        <title>@yield('title') - HEPAN (Health Planner)</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
         <!-- favicon -->

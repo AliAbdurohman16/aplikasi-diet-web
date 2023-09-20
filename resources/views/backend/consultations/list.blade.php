@@ -41,7 +41,11 @@
                     @if ($count > 0)
                         <span class="badge bg-soft-danger float-end">{{ $count }}</span>
                     @endif
-                        <span class="{{ $count > 0 ? 'text-dark' : 'text-muted'}} h6 mb-0 text-truncate" data-id="{{ $list->sender_id }}">{{ $list->message }}</span>
+                        @if ($list->message != '')
+                            <span class="{{ $count > 0 ? 'text-dark' : 'text-muted'}} h6 mb-0 text-truncate" data-id="{{ $list->sender_id }}">{{ $list->message }}</span>
+                        @elseif ($list->attachment != '')
+                        <span class="{{ $count > 0 ? 'text-dark' : 'text-muted'}} h6 mb-0 text-truncate" data-id="{{ $list->sender_id }}"><i class="fas fa-image"></i> Foto</span>
+                        @endif
                 </div>
             </div>
         </a>

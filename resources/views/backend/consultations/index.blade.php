@@ -246,5 +246,44 @@
             }
         });
     }
+
+    function attachment(input) {
+        var fileInput = input;
+        var file = fileInput.files[0];
+
+        if (attachment) {
+            var formData = new FormData();
+            formData.append("attachment", fileInput.files[0]);
+
+            var recipient = $("#recipient").val();
+
+            formData.append("_token", $('meta[name="csrf-token"]').attr('content'));
+            formData.append("recipient", recipient);
+
+            $.ajax({
+                url: "{{ route('consultations.attachment') }}",
+                type: "POST",
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function(response) {
+                    contentChat(recipient);
+
+                    const chatLinks = document.querySelectorAll('.chat-list');
+                    chatLinks.forEach(link => {
+                        link.classList.remove('active');
+                        if (link.getAttribute('data-id') === recipient) {
+                            link.classList.add('active');
+                        }
+                    });
+
+                    listChat();
+                },
+                error: function(xhr, status, error) {
+                    console.error("Terjadi kesalahan saat mengunggah file: " + error);
+                }
+            });
+        }
+    };
 </script>
 @endsection

@@ -103,11 +103,34 @@ class ConsultationController extends Controller
     public function send(Request $request)
     {
         $admin = Auth::user();
+
         $chat = new Consultation;
         $chat->message = $request->message;
         $chat->sender_id = $admin->id;
         $chat->recipient_id = $request->recipient;
         $chat->save();
+
+        return response()->json(['success' => true]);
+    }
+
+    public function attachment(Request $request)
+    {
+        $admin = Auth::user();
+
+        // process upload image
+        if ($request->hasFile('attachment')) {
+            $attachmentPath = $request->file('attachment')->store('public/attachments');
+            $attachmentName = basename($attachmentPath);
+        } else {
+            $attachmentName = '';
+        }
+
+        $chat = new Consultation;
+        $chat->attachment = $attachmentName;
+        $chat->sender_id = $admin->id;
+        $chat->recipient_id = $request->recipient;
+        $chat->save();
+
         return response()->json(['success' => true]);
     }
 

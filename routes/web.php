@@ -39,5 +39,6 @@ Route::middleware('auth')->group(function () {
     Route::get('consultations/person/{id}', [Backend\ConsultationController::class, 'person'])->name('consultations.person');
     Route::get('consultations/content/{id}', [Backend\ConsultationController::class, 'content'])->name('consultations.content');
     Route::post('consultations/send', [Backend\ConsultationController::class, 'send'])->name('consultations.send');
+    Route::post('consultations/attachment', [Backend\ConsultationController::class, 'attachment'])->name('consultations.attachment');
     Route::post('consultations/delete-all', [Backend\ConsultationController::class, 'deleteAll'])->name('consultations.delete-all');
 });

@@ -1,8 +1,8 @@
 <!-- sidebar-wrapper -->
-<nav id="sidebar" class="sidebar-wrapper sidebar-dark">
+<nav id="sidebar" class="sidebar-wrapper">
     <div class="sidebar-content" data-simplebar style="height: calc(100% - 60px);">
-        <div class="sidebar-brand">
-            <a href="">Aplikasi Diet</a>
+        <div class="sidebar-brand justify-content-center">
+            <img src="{{ asset('default/logo-transparent.png') }}" height="55" alt="logo">
         </div>
 
         <ul class="sidebar-menu">

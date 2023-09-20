@@ -37,7 +37,7 @@
                 <button class="btn btn-icon btn-primary" id="send-message"><i class="ti ti-send"></i></button>
             </div>
             <div class="col-auto">
-                <label for="file-upload" class="btn btn-icon btn-primary"><i class="ti ti-paperclip"></i></label>
+                <label for="file-upload" class="btn btn-icon btn-primary"><i class="uil uil-image"></i></label>
                 <input type="file" id="file-upload" name="attachment" accept="image/*" style="display: none;">
             </div>
         </div>

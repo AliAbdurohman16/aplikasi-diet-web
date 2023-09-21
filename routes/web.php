@@ -20,7 +20,7 @@ Route::get('/', function () {
 
 Auth::routes(['register' => false]);
 
-Route::middleware('auth')->group(function () {
+Route::middleware('role:admin')->group(function () {
     Route::get('dashboard', [Backend\DashboardController::class, 'index'])->name('dashboard');
     Route::resources([
         'categories' => Backend\CategoryController::class,

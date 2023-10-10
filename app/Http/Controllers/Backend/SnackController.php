@@ -4,22 +4,20 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
-use App\Models\Drink;
+use App\Models\Snack;
 
-class DrinkController extends Controller
+class SnackController extends Controller
 {
     public function index()
     {
-        // get data
-        $data['drinks'] = Drink::all();
+        $data['snacks'] = Snack::all();
 
-        return view('backend.drinks.index', $data);
+        return view('backend.snacks.index', $data);
     }
 
     public function create()
     {
-        return view('backend.drinks.add');
+        return view('backend.snacks.add');
     }
 
     public function store(Request $request)
@@ -27,6 +25,7 @@ class DrinkController extends Controller
         // validaton
         $request->validate([
             'name' => 'required|max:255',
+            'portion' => 'required',
             'calories' => 'required',
             'proteins' => 'required',
             'carbohydrate' => 'required',
@@ -35,8 +34,9 @@ class DrinkController extends Controller
         ]);
 
         // insert to table
-        Drink::create([
+        Snack::create([
             'name' => $request->name,
+            'portion' => $request->portion,
             'calories' => $request->calories,
             'proteins' => $request->proteins,
             'carbohydrate' => $request->carbohydrate,
@@ -44,15 +44,15 @@ class DrinkController extends Controller
             'sugar' => $request->sugar,
         ]);
 
-        return redirect('drinks')->with('message', 'Minuman berhasil ditambahkan!');
+        return redirect('snacks')->with('message', 'Cemilan berhasil ditambahkan!');
     }
 
     public function edit($id)
     {
         // get data
-        $data['drink'] = Drink::find($id);
+        $data['snack'] = Snack::find($id);
 
-        return view('backend.drinks.edit', $data);
+        return view('backend.snacks.edit', $data);
     }
 
     public function update(Request $request,$id)
@@ -60,6 +60,7 @@ class DrinkController extends Controller
         // validaton
         $request->validate([
             'name' => 'required|max:255',
+            'portion' => 'required',
             'calories' => 'required',
             'proteins' => 'required',
             'carbohydrate' => 'required',
@@ -67,11 +68,13 @@ class DrinkController extends Controller
             'sugar' => 'required',
         ]);
 
-        $drink = Drink::find($id);
+        // get data by id
+        $food = Snack::find($id);
 
         // update to table
-        $drink->update([
+        $food->update([
             'name' => $request->name,
+            'portion' => $request->portion,
             'calories' => $request->calories,
             'proteins' => $request->proteins,
             'carbohydrate' => $request->carbohydrate,
@@ -79,17 +82,17 @@ class DrinkController extends Controller
             'sugar' => $request->sugar,
         ]);
 
-        return redirect('drinks')->with('message', 'Minuman berhasil diubah!');
+        return redirect('snacks')->with('message', 'Cemilan berhasil diubah!');
     }
 
     public function destroy($id)
     {
         // get data by id
-        $drink = Drink::find($id);
+        $snack = Snack::find($id);
 
         // delete data
-        $drink->delete();
+        $snack->delete();
 
-        return response()->json(['message' => 'Minuman berhasil dihapus!']);
+        return response()->json(['message' => 'Cemilan berhasil dihapus!']);
     }
 }

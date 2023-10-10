@@ -22,12 +22,10 @@ Route::post('register', [API\AuthController::class, 'register']);
 Route::post('login', [API\AuthController::class, 'login']);
 
 Route::middleware('auth:sanctum')->group(function () {
+    Route::get('foods', [FoodController::class, 'foods']);
+    Route::get('snacks', [SnackController::class, 'snacks']);
+    Route::get('drinks', [DrinkController::class, 'drinks']);
+    Route::get('sports', [SportController::class, 'sports']);
+    Route::get('educations', [EducationController::class, 'educations']);
     Route::post('logout', [AuthController::class, 'logout']);
-
-    Route::resources([
-        'categories' => CategoryController::class,
-        'subcategories' => SubcategoryController::class,
-        'foods' => FoodController::class,
-        'drinks' => DrinkController::class,
-    ]);
 });

@@ -34,47 +34,10 @@
                             <div class="row mt-4">
                                 <div class="col-md-6">
                                     <div class="mb-3">
-                                        <label class="form-label">Foto Minuman <span class="text-danger">*</span></label>
-                                        <div class="row">
-                                            <div class="col-sm-3 mb-2">
-                                                <img src="{{ asset('storage/drinks/' . $drink->image) }}" width="100px" alt="image" class="img-thumbnail img-preview">
-                                            </div>
-                                            <div class="col-sm-9">
-                                                <input type="file" name="image" id="image" class="form-control @error('image') is-invalid @enderror" value="{{ old('image') }}" accept="image/*" onchange="previewImg()">
-                                                @error('image')
-                                                    <span class="invalid-feedback errorimage" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
-                                                @enderror
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div><!--end col-->
-                                <div class="col-md-6">
-                                    <div class="mb-3">
                                         <label class="form-label">Nama Minuman <span class="text-danger">*</span></label>
                                         <input type="text" class="form-control @error('name') is-invalid @enderror" placeholder="Nama Minuman" name="name" value="{{ $drink->name }}" autocomplete="name">
                                         @error('name')
                                             <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
-                                </div><!--end col-->
-                                <div class="col-md-6">
-                                    <div class="mb-3">
-                                        <label class="form-label">Subkategori <span class="text-danger">*</span></label>
-                                        <select name="subcategory" id="subcategory" class="form-control select2 @error('subcategory') is-invalid @enderror">
-                                            <option value="">Pilih Subkategori</option>
-                                            @foreach ($subcategories as $subcategory)
-                                                <option value="{{ $subcategory->id }}"
-                                                    {{ $drink->subcategory_id == $subcategory->id ? 'selected' : '' }}>
-                                                    {{ $subcategory->name }}
-                                                </option>
-                                            @endforeach
-                                        </select>
-                                        @error('subcategory')
-                                            <span class="invalid-feedback errorname" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>
                                         @enderror
@@ -92,7 +55,7 @@
                                                     </div>
                                                 @enderror
                                             </div>
-                                            <div class="col-5 col-sm-4"><p class="mt-1">/gram</p></div>
+                                            <div class="col-5 col-sm-4"><p class="mt-1">kal/kkal</p></div>
                                         </div>
                                     </div>
                                 </div><!--end col-->
@@ -108,7 +71,7 @@
                                                     </div>
                                                 @enderror
                                             </div>
-                                            <div class="col-5 col-sm-4"><p class="mt-1">/gram</p></div>
+                                            <div class="col-5 col-sm-4"><p class="mt-1">gram</p></div>
                                         </div>
                                     </div>
                                 </div><!--end col-->
@@ -124,7 +87,7 @@
                                                     </div>
                                                 @enderror
                                             </div>
-                                            <div class="col-5 col-sm-4"><p class="mt-1">/gram</p></div>
+                                            <div class="col-5 col-sm-4"><p class="mt-1">gram</p></div>
                                         </div>
                                     </div>
                                 </div><!--end col-->
@@ -140,21 +103,26 @@
                                                     </div>
                                                 @enderror
                                             </div>
-                                            <div class="col-5 col-sm-4"><p class="mt-1">/gram</p></div>
+                                            <div class="col-5 col-sm-4"><p class="mt-1">gram</p></div>
                                         </div>
                                     </div>
                                 </div><!--end col-->
-                                <div class="col-md-12">
+                                <div class="col-md-6">
                                     <div class="mb-3">
-                                        <label class="form-label">Deskripsi Minuman  <span class="text-danger">*</span></label>
-                                        <textarea name="description" id="summernote" rows="4" class="form-control @error('description') is-invalid @enderror" placeholder="Deskripsi Minuman">{{ $drink->description }}</textarea>
-                                        @error('description')
-                                            <div class="invalid-feedback">
-                                                {{ $message }}
+                                        <label class="form-label">Gula <span class="text-danger">*</span></label>
+                                        <div class="row">
+                                            <div class="col-7 col-sm-8 mb-2">
+                                                <input name="sugar" id="sugar" type="number" class="form-control @error('sugar') is-invalid @enderror" placeholder="Gula" value="{{ $drink->sugar }}">
+                                                @error('sugar')
+                                                    <div class="invalid-feedback">
+                                                        {{ $message }}
+                                                    </div>
+                                                @enderror
                                             </div>
-                                        @enderror
+                                            <div class="col-5 col-sm-4"><p class="mt-1">gram</p></div>
+                                        </div>
                                     </div>
-                                </div>
+                                </div><!--end col-->
                             </div><!--end row-->
                             <div class="row">
                                 <div class="col-sm-12">
@@ -169,26 +137,4 @@
         <!--end col-->
     </div>
 </div><!--end container-->
-@endsection
-
-@section('javascript')
-<script src="{{ asset('backend') }}/libs/select2/select2.min.js"></script>
-<script src="{{ asset('backend') }}/libs/summernote/summernote.min.js"></script>
-<script>
-    $(document).ready(function() {
-        $('.select2').select2();
-        $('#summernote').summernote();
-    });
-
-    // function preview image
-    function previewImg() {
-        const logo = document.querySelector('#image');
-        const imgPreview = document.querySelector('.img-preview');
-        const fileImg = new FileReader();
-        fileImg.readAsDataURL(logo.files[0]);
-        fileImg.onload = function(e) {
-            imgPreview.src = e.target.result;
-        }
-    }
-</script>
 @endsection

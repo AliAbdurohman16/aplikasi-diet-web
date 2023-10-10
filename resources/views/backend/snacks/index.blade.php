@@ -1,6 +1,6 @@
 @extends('layouts.backend.main')
 
-@section('title', 'Olahraga')
+@section('title', 'Cemilan')
 
 @section('css')
 <!-- Datatables -->
@@ -13,11 +13,11 @@
 <div class="container-fluid">
     <div class="layout-specing">
         <div class="d-md-flex justify-content-between align-items-center">
-            <h5 class="mb-0">Olahraga</h5>
+            <h5 class="mb-0">Cemilan</h5>
 
             <nav aria-label="breadcrumb" class="d-inline-block">
                 <ul class="breadcrumb bg-transparent rounded mb-0 p-0">
-                    <li class="breadcrumb-item text-capitalize"><a href="#">Olahraga</a></li>
+                    <li class="breadcrumb-item text-capitalize"><a href="#">Cemilan</a></li>
                     <li class="breadcrumb-item text-capitalize active" aria-current="page">list</li>
                 </ul>
             </nav>
@@ -26,7 +26,7 @@
         <div class="row">
             <div class="col-12 mt-4">
                 <div class="d-grid gap-2 d-md-flex">
-                    <a href="{{ route('sports.create') }}" class="btn btn-primary mb-3 btn-sm">
+                    <a href="{{ route('snacks.create') }}" class="btn btn-primary mb-3 btn-sm">
                         Tambah Data +
                     </a>
                 </div>
@@ -37,26 +37,30 @@
                                 <tr>
                                     <th class="text-center border-bottom p-3">No</th>
                                     <th class="border-bottom p-3">Nama</th>
-                                    <th class="border-bottom p-3">5 Menit</th>
-                                    <th class="border-bottom p-3">15 Menit</th>
-                                    <th class="border-bottom p-3">30 Menit</th>
-                                    <th class="border-bottom p-3">1 Jam</th>
+                                    <th class="border-bottom p-3">Porsi</th>
+                                    <th class="border-bottom p-3">Kalori</th>
+                                    <th class="border-bottom p-3">Protein</th>
+                                    <th class="border-bottom p-3">Karbohidrat</th>
+                                    <th class="border-bottom p-3">Lemak</th>
+                                    <th class="border-bottom p-3">Gula</th>
                                     <th class="border-bottom p-3">Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <!-- Start -->
-                                @foreach($sports as $sport)
+                                @foreach($snacks as $snack)
                                     <tr>
                                         <th class="text-center p-3" style="width: 5%;">{{ $loop->iteration }}</th>
-                                        <td class="p-3">{{ $sport->name }}</td>
-                                        <td class="p-3">{{ $sport->five_minute_calories }} kal/kkal</td>
-                                        <td class="p-3">{{ $sport->fifteen_minute_calories }} kal/kkal</td>
-                                        <td class="p-3">{{ $sport->thirty_minute_calories }} kal/kkal</td>
-                                        <td class="p-3">{{ $sport->one_hour_calories }} kal/kkal</td>
+                                        <td class="p-3">{{ $snack->name }}</td>
+                                        <td class="p-3">{{ $snack->portion }}</td>
+                                        <td class="p-3">{{ $snack->calories }} kal/kkal</td>
+                                        <td class="p-3">{{ $snack->proteins }} gram</td>
+                                        <td class="p-3">{{ $snack->carbohydrate }} gram</td>
+                                        <td class="p-3">{{ $snack->fat }} gram</td>
+                                        <td class="p-3">{{ $snack->sugar }} gram</td>
                                         <td>
-                                            <a href="sports/{{ $sport->id }}/edit" class="btn btn-warning btn-sm mb-2"><i class="fa-solid fa-pen"></i> Edit</a>
-                                            <button type="button" class="btn btn-danger btn-sm mb-2 btn-delete" data-id="{{ $sport->id }}"><i class="fa-solid fa-trash"></i> Hapus</button>
+                                            <a href="snacks/{{ $snack->id }}/edit" class="btn btn-warning btn-sm mb-2"><i class="fa-solid fa-pen"></i> Edit</a>
+                                            <button type="button" class="btn btn-danger btn-sm mb-2 btn-delete" data-id="{{ $snack->id }}"><i class="fa-solid fa-trash"></i> Hapus</button>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -114,7 +118,7 @@
         }).then((result) => {
             if (result.isConfirmed) {
                 $.ajax({
-                    url: "sports/" + id,
+                    url: "snacks/" + id,
                     type: 'DELETE',
                     data: {
                         "id": id,

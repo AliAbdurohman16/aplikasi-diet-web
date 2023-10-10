@@ -26,34 +26,20 @@ class SportController extends Controller
     {
         // validaton
         $request->validate([
-            'image' => 'required|image|mimes:jpeg,png,jpg|max:2048',
             'name' => 'required|max:255',
-            'set' => 'required',
-            'time' => 'required',
-            'per' => 'required',
-            'calories' => 'required',
-            'fat' => 'required',
-            'description' => 'required',
+            'five_minute_calories' => 'required',
+            'fifteen_minute_calories' => 'required',
+            'thirty_minute_calories' => 'required',
+            'one_hour_calories' => 'required',
         ]);
-
-        // process upload image
-        if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('public/sports');
-            $imageName = basename($imagePath);
-        } else {
-            $imageName = '';
-        }
 
         // insert to table
         Sport::create([
-            'image' => $imageName,
             'name' => $request->name,
-            'set' => $request->set,
-            'time' => $request->time,
-            'per' => $request->per,
-            'calories' => $request->calories,
-            'fat' => $request->fat,
-            'description' => $request->description,
+            'five_minute_calories' => $request->five_minute_calories,
+            'fifteen_minute_calories' => $request->fifteen_minute_calories,
+            'thirty_minute_calories' => $request->thirty_minute_calories,
+            'one_hour_calories' => $request->one_hour_calories,
         ]);
 
         return redirect('sports')->with('message', 'Olahraga berhasil ditambahkan!');
@@ -71,41 +57,24 @@ class SportController extends Controller
     {
         // validaton
         $request->validate([
-            'image' => 'image|mimes:jpeg,png,jpg|max:2048',
             'name' => 'required|max:255',
-            'set' => 'required',
-            'time' => 'required',
-            'per' => 'required',
-            'calories' => 'required',
-            'fat' => 'required',
-            'description' => 'required',
+            'five_minute_calories' => 'required',
+            'fifteen_minute_calories' => 'required',
+            'thirty_minute_calories' => 'required',
+            'one_hour_calories' => 'required',
         ]);
+
 
         // get data by id
         $sport = Sport::find($id);
 
-        // proces upload image
-        if ($request->hasFile('image')) {
-            if ($sport->image && Storage::exists('public/sports/' . $sport->image)) {
-                Storage::delete('public/sports/' . $sport->image);
-            }
-
-            $imagePath = $request->file('image')->store('public/sports');
-            $imageName = basename($imagePath);
-        } else {
-            $imageName = $sport->image;
-        }
-
         // update to table
         $sport->update([
-            'image' => $imageName,
             'name' => $request->name,
-            'set' => $request->set,
-            'time' => $request->time,
-            'per' => $request->per,
-            'calories' => $request->calories,
-            'fat' => $request->fat,
-            'description' => $request->description,
+            'five_minute_calories' => $request->five_minute_calories,
+            'fifteen_minute_calories' => $request->fifteen_minute_calories,
+            'thirty_minute_calories' => $request->thirty_minute_calories,
+            'one_hour_calories' => $request->one_hour_calories,
         ]);
 
         return redirect('sports')->with('message', 'Olahraga berhasil diubah!');
@@ -115,11 +84,6 @@ class SportController extends Controller
     {
         // get data by id
         $sport = Sport::find($id);
-
-        // proses delete image
-        if ($sport->image) {
-            Storage::delete('public/sports/' . $sport->image);
-        }
 
         // delete data
         $sport->delete();

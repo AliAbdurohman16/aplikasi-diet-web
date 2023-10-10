@@ -11,9 +11,4 @@ class Food extends Model
 
     protected $table = 'foods';
     protected $guarded = [];
-
-    public function subcategory()
-    {
-        return $this->belongsTo(Subcategory::class);
-    }
 }

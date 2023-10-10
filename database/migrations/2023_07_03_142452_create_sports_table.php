@@ -15,14 +15,11 @@ return new class extends Migration
     {
         Schema::create('sports', function (Blueprint $table) {
             $table->id();
-            $table->string('image');
             $table->string('name');
-            $table->string('set');
-            $table->string('time');
-            $table->string('per');
-            $table->string('calories');
-            $table->string('fat');
-            $table->text('description');
+            $table->string('five_minute_calories');
+            $table->string('fifteen_minute_calories');
+            $table->string('thirty_minute_calories');
+            $table->string('one_hour_calories');
             $table->timestamps();
         });
     }

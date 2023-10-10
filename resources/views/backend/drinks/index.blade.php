@@ -36,13 +36,12 @@
                             <thead>
                                 <tr>
                                     <th class="text-center border-bottom p-3">No</th>
-                                    <th class="border-bottom p-3">Foto</th>
                                     <th class="border-bottom p-3">Nama</th>
-                                    <th class="border-bottom p-3">Subkategori</th>
                                     <th class="border-bottom p-3">Kalori</th>
                                     <th class="border-bottom p-3">Protein</th>
                                     <th class="border-bottom p-3">Karbohidrat</th>
                                     <th class="border-bottom p-3">Lemak</th>
+                                    <th class="border-bottom p-3">Gula</th>
                                     <th class="border-bottom p-3">Aksi</th>
                                 </tr>
                             </thead>
@@ -51,14 +50,13 @@
                                 @foreach($drinks as $drink)
                                     <tr>
                                         <th class="text-center p-3" style="width: 5%;">{{ $loop->iteration }}</th>
-                                        <td class="p-3"><img src="{{ asset('storage/drinks/' . $drink->image) }}" width="70px" class="img-fluid" alt="image-categories"></td>
                                         <td class="p-3">{{ $drink->name }}</td>
-                                        <td class="p-3">{{ $drink->subcategory->name }}</td>
-                                        <td class="p-3">{{ $drink->calories }} gram</td>
+                                        <td class="p-3">{{ $drink->calories }} kal/kkal</td>
                                         <td class="p-3">{{ $drink->proteins }} gram</td>
                                         <td class="p-3">{{ $drink->carbohydrate }} gram</td>
                                         <td class="p-3">{{ $drink->fat }} gram</td>
-                                        <td style="width: 25%;">
+                                        <td class="p-3">{{ $drink->sugar }} gram</td>
+                                        <td>
                                             <a href="drinks/{{ $drink->id }}/edit" class="btn btn-warning btn-sm mb-2"><i class="fa-solid fa-pen"></i> Edit</a>
                                             <button type="button" class="btn btn-danger btn-sm mb-2 btn-delete" data-id="{{ $drink->id }}"><i class="fa-solid fa-trash"></i> Hapus</button>
                                         </td>

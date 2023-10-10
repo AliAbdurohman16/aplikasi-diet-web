@@ -23,9 +23,8 @@ Auth::routes(['register' => false]);
 Route::middleware('role:admin')->group(function () {
     Route::get('dashboard', [Backend\DashboardController::class, 'index'])->name('dashboard');
     Route::resources([
-        'categories' => Backend\CategoryController::class,
-        'subcategories' => Backend\SubcategoryController::class,
         'foods' => Backend\FoodController::class,
+        'snacks' => Backend\SnackController::class,
         'drinks' => Backend\DrinkController::class,
         'sports' => Backend\SportController::class,
         'educations' => Backend\EducationController::class,

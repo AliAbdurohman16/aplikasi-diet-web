@@ -13,13 +13,16 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('subcategories', function (Blueprint $table) {
+        Schema::create('snacks', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('category_id');
             $table->string('name');
-            $table->string('slug');
+            $table->string('portion')->nullable();
+            $table->string('calories')->nullable();
+            $table->string('proteins')->nullable();
+            $table->string('carbohydrate')->nullable();
+            $table->string('fat')->nullable();
+            $table->string('sugar')->nullable();
             $table->timestamps();
-            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 
@@ -30,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('subcategories');
+        Schema::dropIfExists('snacks');
     }
 };

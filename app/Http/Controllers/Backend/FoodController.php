@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Food;
-use App\Models\Subcategory;
 
 class FoodController extends Controller
 {
@@ -20,44 +19,33 @@ class FoodController extends Controller
 
     public function create()
     {
-        // get data
-        $data['subcategories'] = Subcategory::all();
-
-        return view('backend.foods.add', $data);
+        return view('backend.foods.add');
     }
 
     public function store(Request $request)
     {
         // validaton
         $request->validate([
-            'image' => 'required|image|mimes:jpeg,png,jpg|max:2048',
             'name' => 'required|max:255',
-            'subcategory' => 'required',
+            'portion' => 'required',
             'calories' => 'required',
             'proteins' => 'required',
             'carbohydrate' => 'required',
             'fat' => 'required',
-            'description' => 'required',
+            'fiber' => 'required',
+            'sugar' => 'required',
         ]);
-
-        // process upload image
-        if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('public/foods');
-            $imageName = basename($imagePath);
-        } else {
-            $imageName = '';
-        }
 
         // insert to table
         Food::create([
-            'image' => $imageName,
             'name' => $request->name,
-            'subcategory_id' => $request->subcategory,
+            'portion' => $request->portion,
             'calories' => $request->calories,
             'proteins' => $request->proteins,
             'carbohydrate' => $request->carbohydrate,
             'fat' => $request->fat,
-            'description' => $request->description,
+            'fiber' => $request->fiber,
+            'sugar' => $request->sugar,
         ]);
 
         return redirect('foods')->with('message', 'Makanan berhasil ditambahkan!');
@@ -66,10 +54,7 @@ class FoodController extends Controller
     public function edit($id)
     {
         // get data
-        $data = [
-            'food' => Food::find($id),
-            'subcategories' => Subcategory::all(),
-        ];
+        $data['food'] = Food::find($id);
 
         return view('backend.foods.edit', $data);
     }
@@ -78,41 +63,29 @@ class FoodController extends Controller
     {
         // validaton
         $request->validate([
-            'image' => 'image|mimes:jpeg,png,jpg|max:2048',
             'name' => 'required|max:255',
-            'subcategory' => 'required',
+            'portion' => 'required',
             'calories' => 'required',
             'proteins' => 'required',
             'carbohydrate' => 'required',
             'fat' => 'required',
-            'description' => 'required',
+            'fiber' => 'required',
+            'sugar' => 'required',
         ]);
 
         // get data by id
         $food = Food::find($id);
 
-        // proces upload image
-        if ($request->hasFile('image')) {
-            if ($food->image && Storage::exists('public/foods/' . $food->image)) {
-                Storage::delete('public/foods/' . $food->image);
-            }
-
-            $imagePath = $request->file('image')->store('public/foods');
-            $imageName = basename($imagePath);
-        } else {
-            $imageName = $food->image;
-        }
-
         // update to table
         $food->update([
-            'image' => $imageName,
             'name' => $request->name,
-            'subcategory_id' => $request->subcategory,
+            'portion' => $request->portion,
             'calories' => $request->calories,
             'proteins' => $request->proteins,
             'carbohydrate' => $request->carbohydrate,
             'fat' => $request->fat,
-            'description' => $request->description,
+            'fiber' => $request->fiber,
+            'sugar' => $request->sugar,
         ]);
 
         return redirect('foods')->with('message', 'Makanan berhasil diubah!');
@@ -122,11 +95,6 @@ class FoodController extends Controller
     {
         // get data by id
         $food = Food::find($id);
-
-        // proses delete image
-        if ($food->image) {
-            Storage::delete('public/foods/' . $food->image);
-        }
 
         // delete data
         $food->delete();

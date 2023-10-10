@@ -1,6 +1,6 @@
 @extends('layouts.backend.main')
 
-@section('title', 'Tambah Data Minuman')
+@section('title', 'Tambah Data Cemilan')
 
 @section('css')
 <link rel="stylesheet" href="{{ asset('backend') }}/libs/select2/select2.min.css"/>
@@ -12,30 +12,41 @@
 <div class="container-fluid">
     <div class="layout-specing">
         <div class="d-md-flex justify-content-between align-items-center">
-            <h5 class="mb-0">Tambah Data Minuman</h5>
+            <h5 class="mb-0">Tambah Data Cemilan</h5>
 
             <nav aria-label="breadcrumb" class="d-inline-block">
                 <ul class="breadcrumb bg-transparent rounded mb-0 p-0">
-                    <li class="breadcrumb-item text-capitalize"><a href="{{ route('drinks.index') }}">Minuman</a></li>
+                    <li class="breadcrumb-item text-capitalize"><a href="{{ route('snacks.index') }}">Cemilan</a></li>
                     <li class="breadcrumb-item text-capitalize active" aria-current="page">Tambah Data</li>
                 </ul>
             </nav>
         </div>
 
-        <a href="{{ route('drinks.index') }}" class="btn btn-warning btn-sm mt-4"><i class="fa-solid fa-arrow-left"></i> Kembali</a>
+        <a href="{{ route('snacks.index') }}" class="btn btn-warning btn-sm mt-4"><i class="fa-solid fa-arrow-left"></i> Kembali</a>
 
         <div class="col-lg-12 mt-4">
             <div class="card">
                 <div class="container">
                     <div class="card-body">
-                        <form action="{{ route('drinks.store') }}" method="POST">
+                        <form action="{{ route('snacks.store') }}" method="POST">
                             @csrf
                             <div class="row mt-4">
                                 <div class="col-md-6">
                                     <div class="mb-3">
-                                        <label class="form-label">Nama Minuman <span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control @error('name') is-invalid @enderror" placeholder="Nama Minuman" name="name" value="{{ old('name') }}" autocomplete="name">
+                                        <label class="form-label">Nama Cemilan <span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control @error('name') is-invalid @enderror" placeholder="Nama Cemilan" name="name" value="{{ old('name') }}" autocomplete="name">
                                         @error('name')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                </div><!--end col-->
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label class="form-label">Porsi <span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control @error('portion') is-invalid @enderror" placeholder="Contoh: 1 Porsi" name="portion" value="{{ old('portion') }}" autocomplete="portion">
+                                        @error('portion')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>

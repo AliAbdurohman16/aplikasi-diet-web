@@ -15,16 +15,15 @@ return new class extends Migration
     {
         Schema::create('foods', function (Blueprint $table) {
             $table->id();
-            $table->string('image');
             $table->string('name');
-            $table->unsignedBigInteger('subcategory_id');
-            $table->string('calories');
-            $table->string('proteins');
-            $table->string('carbohydrate');
-            $table->string('fat');
-            $table->text('description');
+            $table->string('portion')->nullable();
+            $table->string('calories')->nullable();
+            $table->string('proteins')->nullable();
+            $table->string('carbohydrate')->nullable();
+            $table->string('fat')->nullable();
+            $table->string('fiber')->nullable();
+            $table->string('sugar')->nullable();
             $table->timestamps();
-            $table->foreign('subcategory_id')->references('id')->on('subcategories')->onDelete('cascade');
         });
     }
 

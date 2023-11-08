@@ -18,7 +18,7 @@ class ProfileController extends Controller
         return ResponseFormatter::success(['profile' => $profile], 'Data berhasil ditampilkan!');
     }
 
-    public function update(Request $request,$id)
+    public function update(Request $request)
     {
         // get data
         $profile = Auth::user();

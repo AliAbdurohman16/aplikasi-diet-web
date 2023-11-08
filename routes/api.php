@@ -29,6 +29,6 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('educations', [API\EducationController::class, 'index']);
     Route::get('anthropometry', [API\AnthropometryController::class, 'index']);
     Route::get('profile', [API\ProfileController::class, 'index']);
-    Route::put('profile/{id}', [API\ProfileController::class, 'update']);
+    Route::put('profile', [API\ProfileController::class, 'update']);
     Route::post('logout', [API\AuthController::class, 'logout']);
 });

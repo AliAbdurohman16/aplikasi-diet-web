@@ -23,6 +23,7 @@ Route::post('login', [API\AuthController::class, 'login']);
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('foods', [API\FoodController::class, 'index']);
+    Route::post('foods', [API\FoodController::class, 'store']);
     Route::get('snacks', [API\SnackController::class, 'index']);
     Route::get('drinks', [API\DrinkController::class, 'index']);
     Route::get('sports', [API\SportController::class, 'index']);

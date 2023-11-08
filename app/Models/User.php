@@ -46,4 +46,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Chat::class, 'recipient_id');
     }
+
+    public function histories()
+    {
+        return $this->hasMany(History::class);
+    }
 }

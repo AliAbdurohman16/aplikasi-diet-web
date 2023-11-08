@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Sport;
+use App\Helpers\ResponseFormatter;
 
 class SportController extends Controller
 {
@@ -12,6 +13,6 @@ class SportController extends Controller
     {
         $sports = Sport::all();
 
-        return response()->json($sports, 200);
+        return ResponseFormatter::success(['sports' => $sports], 'Data berhasil ditampilkan!');
     }
 }

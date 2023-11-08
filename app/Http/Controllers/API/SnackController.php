@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Snack;
+use App\Helpers\ResponseFormatter;
 
 class SnackController extends Controller
 {
@@ -12,6 +13,6 @@ class SnackController extends Controller
     {
         $snacks = Snack::all();
 
-        return response()->json($snacks, 200);
+        return ResponseFormatter::success(['snacks' => $snacks], 'Data berhasil ditampilkan!');
     }
 }

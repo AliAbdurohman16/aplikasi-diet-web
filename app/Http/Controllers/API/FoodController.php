@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Food;
+use App\Helpers\ResponseFormatter;
 
 class FoodController extends Controller
 {
@@ -12,6 +13,6 @@ class FoodController extends Controller
     {
         $foods = Food::all();
 
-        return response()->json($foods, 200);
+        return ResponseFormatter::success(['foods' => $foods], 'Data berhasil ditampilkan!');
     }
 }

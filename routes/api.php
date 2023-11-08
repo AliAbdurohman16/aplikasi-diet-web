@@ -22,6 +22,7 @@ Route::post('register', [API\AuthController::class, 'register']);
 Route::post('login', [API\AuthController::class, 'login']);
 
 Route::middleware('auth:sanctum')->group(function () {
+    Route::get('dashboard', [API\DashboardController::class, 'index']);
     Route::get('foods', [API\FoodController::class, 'index']);
     Route::post('foods', [API\FoodController::class, 'store']);
     Route::get('snacks', [API\SnackController::class, 'index']);

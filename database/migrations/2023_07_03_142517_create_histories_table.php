@@ -16,9 +16,11 @@ return new class extends Migration
         Schema::create('histories', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
+            $table->string('category');
             $table->string('calories');
             $table->string('carbohydrates');
             $table->string('protein');
+            $table->string('fat');
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });

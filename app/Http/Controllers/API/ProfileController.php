@@ -11,7 +11,14 @@ use App\Helpers\ResponseFormatter;
 
 class ProfileController extends Controller
 {
-    public function index(Request $request,$id)
+    public function index()
+    {
+        $profile = Auth::user();
+
+        return ResponseFormatter::success(['profile' => $profile], 'Data berhasil ditampilkan!');
+    }
+
+    public function update(Request $request,$id)
     {
         // get data
         $profile = Auth::user();

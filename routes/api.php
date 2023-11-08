@@ -22,10 +22,11 @@ Route::post('register', [API\AuthController::class, 'register']);
 Route::post('login', [API\AuthController::class, 'login']);
 
 Route::middleware('auth:sanctum')->group(function () {
-    Route::get('foods', [FoodController::class, 'foods']);
-    Route::get('snacks', [SnackController::class, 'snacks']);
-    Route::get('drinks', [DrinkController::class, 'drinks']);
-    Route::get('sports', [SportController::class, 'sports']);
-    Route::get('educations', [EducationController::class, 'educations']);
-    Route::post('logout', [AuthController::class, 'logout']);
+    Route::get('foods', [API\FoodController::class, 'index']);
+    Route::get('snacks', [API\SnackController::class, 'index']);
+    Route::get('drinks', [API\DrinkController::class, 'index']);
+    Route::get('sports', [API\SportController::class, 'index']);
+    Route::get('educations', [API\EducationController::class, 'index']);
+    Route::put('profile/{id}', [API\ProfileController::class, 'index']);
+    Route::post('logout', [API\AuthController::class, 'logout']);
 });

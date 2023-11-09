@@ -105,7 +105,7 @@
     @endif
 
     // function delete
-    $(".btn-delete").click(function() {
+    $(document).on('click', '.btn-delete', function() {
         var id = $(this).data("id");
         Swal.fire({
             title: 'Hapus',

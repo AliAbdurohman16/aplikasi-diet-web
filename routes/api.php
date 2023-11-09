@@ -34,6 +34,11 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('anthropometry', [API\AnthropometryController::class, 'index']);
     Route::get('report', [API\ReportController::class, 'index']);
     Route::get('report/show', [API\ReportController::class, 'show']);
+    Route::get('consultations', [API\ConsultationController::class, 'index']);
+    Route::post('consultations', [API\ConsultationController::class, 'store']);
+    Route::get('consultations/{id}', [API\ConsultationController::class, 'show']);
+    Route::post('consultations/attachment', [API\ConsultationController::class, 'attachment']);
+    Route::delete('consultations/{id}', [API\ConsultationController::class, 'deletePerson']);
     Route::get('profile', [API\ProfileController::class, 'index']);
     Route::put('profile', [API\ProfileController::class, 'update']);
     Route::post('logout', [API\AuthController::class, 'logout']);

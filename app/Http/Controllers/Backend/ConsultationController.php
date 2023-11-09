@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Events\ChatListUpdated;
+use Illuminate\Support\Facades\Storage;
 
 class ConsultationController extends Controller
 {
@@ -78,7 +79,7 @@ class ConsultationController extends Controller
         // get data user
         $user = Auth::user();
 
-        // get data user yang dituju
+        // get data intended user
         $recipient = User::findOrFail($id);
 
         $reads = Consultation::where('recipient_id', $user->id)

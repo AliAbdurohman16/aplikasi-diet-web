@@ -48,7 +48,7 @@
                                         <label class="form-label">Kalori <span class="text-danger">*</span></label>
                                         <div class="row">
                                             <div class="col-7 col-sm-8 mb-2">
-                                                <input name="calories" id="calories" type="number" class="form-control @error('calories') is-invalid @enderror" placeholder="Kalori" value="{{ $drink->calories }}">
+                                                <input name="calories" id="calories" type="text" class="form-control @error('calories') is-invalid @enderror" placeholder="Kalori" value="{{ $drink->calories }}">
                                                 @error('calories')
                                                     <div class="invalid-feedback">
                                                         {{ $message }}
@@ -64,7 +64,7 @@
                                         <label class="form-label">Protein <span class="text-danger">*</span></label>
                                         <div class="row">
                                             <div class="col-7 col-sm-8 mb-2">
-                                                <input name="proteins" id="proteins" type="number" class="form-control @error('proteins') is-invalid @enderror" placeholder="Protein" value="{{ $drink->proteins }}">
+                                                <input name="proteins" id="proteins" type="text" class="form-control @error('proteins') is-invalid @enderror" placeholder="Protein" value="{{ $drink->proteins }}">
                                                 @error('proteins')
                                                     <div class="invalid-feedback">
                                                         {{ $message }}
@@ -80,7 +80,7 @@
                                         <label class="form-label">Karbohidrat <span class="text-danger">*</span></label>
                                         <div class="row">
                                             <div class="col-7 col-sm-8 mb-2">
-                                                <input name="carbohydrate" id="carbohydrate" type="number" class="form-control @error('carbohydrate') is-invalid @enderror" placeholder="Karbohidrat" value="{{ $drink->carbohydrate }}">
+                                                <input name="carbohydrate" id="carbohydrate" type="text" class="form-control @error('carbohydrate') is-invalid @enderror" placeholder="Karbohidrat" value="{{ $drink->carbohydrate }}">
                                                 @error('carbohydrate')
                                                     <div class="invalid-feedback">
                                                         {{ $message }}
@@ -96,7 +96,7 @@
                                         <label class="form-label">Lemak <span class="text-danger">*</span></label>
                                         <div class="row">
                                             <div class="col-7 col-sm-8 mb-2">
-                                                <input name="fat" id="fat" type="number" class="form-control @error('fat') is-invalid @enderror" placeholder="Lemak" value="{{ $drink->fat }}">
+                                                <input name="fat" id="fat" type="text" class="form-control @error('fat') is-invalid @enderror" placeholder="Lemak" value="{{ $drink->fat }}">
                                                 @error('fat')
                                                     <div class="invalid-feedback">
                                                         {{ $message }}
@@ -112,7 +112,7 @@
                                         <label class="form-label">Gula <span class="text-danger">*</span></label>
                                         <div class="row">
                                             <div class="col-7 col-sm-8 mb-2">
-                                                <input name="sugar" id="sugar" type="number" class="form-control @error('sugar') is-invalid @enderror" placeholder="Gula" value="{{ $drink->sugar }}">
+                                                <input name="sugar" id="sugar" type="text" class="form-control @error('sugar') is-invalid @enderror" placeholder="Gula" value="{{ $drink->sugar }}">
                                                 @error('sugar')
                                                     <div class="invalid-feedback">
                                                         {{ $message }}

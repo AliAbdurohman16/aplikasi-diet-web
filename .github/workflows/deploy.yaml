@@ -17,6 +17,7 @@ jobs:
       - name: Install composer dependencies
         uses: php-actions/composer@v6
         with:
+          php_version: "8.1"
           dev: no
           args: --optimize-autoloader --no-dev
 

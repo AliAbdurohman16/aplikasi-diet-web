@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Helpers\ResponseFormatter;
 use App\Http\Controllers\Controller;
+use App\Models\BMRCalculator;
 use Illuminate\Http\Request;
 
 class BMRCalculatorController extends Controller
@@ -30,13 +32,14 @@ class BMRCalculatorController extends Controller
             $result = 655 + (9.6 + $weight) + (1.8 * $height) - (4.7 - $age);
         }
 
+        BMRCalculator::create($result);
+
         $data = [
             'result' => $result,
-
         ];
 
 
-
+        return ResponseFormatter::success($result, 'Data berhasil ditambahkan!');
 
     }
 

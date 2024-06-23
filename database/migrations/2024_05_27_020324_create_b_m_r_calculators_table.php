@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class () extends Migration {
     /**
      * Run the migrations.
      *
@@ -15,10 +14,6 @@ return new class extends Migration
     {
         Schema::create('b_m_r_calculators', function (Blueprint $table) {
             $table->id();
-            $table->unsignedInteger('age');
-            $table->string('gender');
-            $table->unsignedDouble('weight');
-            $table->unsignedDouble('height');
             $table->string('result');
             $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();

@@ -15,7 +15,7 @@ return new class extends Migration {
          Schema::table('anthropometries', function (Blueprint $table) {
             $table->unsignedDouble('weight');
             $table->unsignedDouble('height');
-            $table->unsignedInteger('user_id');
+
             $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }

@@ -9,5 +9,6 @@ class BMRCalculator extends Model
 {
     use HasFactory;
 
-    protected  $guarded = [];
+    protected $table = 'b_m_r_calculators';
+    protected $guarded = [];
 }

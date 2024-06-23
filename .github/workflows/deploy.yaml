@@ -1,5 +1,5 @@
 name: 🚀 Deploy website on push to hosting
-on: 
+on:
   workflow_dispatch:
   push:
     branches:
@@ -11,18 +11,34 @@ jobs:
     name: 🎉 Deploy
     runs-on: ubuntu-latest
     steps:
-    - name: 🚚 Get latest code
-      uses: actions/checkout@v2
+      - name: 🚚 Get latest code
+        uses: actions/checkout@v3
 
-    - name: Install composer dependencies
-      run: composer install
+      - name: Cache composer dependencies
+        uses: actions/cache@v3
+        with:
+          path: /tmp/composer-cache
+          key: ${{ runner.os }}-${{ hasFiles('**/composer.lock') }}
 
-    - name: Install npm modules
-      run: npm install
+      - name: Install composer dependencies
+        uses: php-actions/composer@v6
+        with:
+          dev: no
+          args: --optimize-autoloader --no-dev
 
-    - name: 📂 Sync files
-      uses: SamKirkland/FTP-Deploy-Action@4.3.2
-      with:
-        server: ftp.justnear.my.id
-        username: ${{ secrets.FTP_USER }}
-        password: ${{ secrets.FTP_PASSWORD }}
+      - name: Install npm modules
+        run: npm install
+
+      - name: Run vite bundler
+        run: npm run build
+
+      - name: 📂 Sync files
+        uses: SamKirkland/FTP-Deploy-Action@4.3.5
+        with:
+          server: ftp.justnear.my.id
+          username: ${{ secrets.FTP_USER }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/node_modules/**

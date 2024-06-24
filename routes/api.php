@@ -42,4 +42,6 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('profile', [API\ProfileController::class, 'index']);
     Route::put('profile', [API\ProfileController::class, 'update']);
     Route::post('logout', [API\AuthController::class, 'logout']);
+    Route::get('bmr', [API\BMRCalculatorController::class, 'index']);
+    Route::get('tdee', [API\TDEECalculatorController::class, 'index']);
 });

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Helpers\ResponseFormatter;
 use App\Http\Controllers\Controller;
 use App\Models\BMRCalculator;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -19,7 +20,7 @@ class BMRCalculatorController extends Controller
     public function index(Request $request)
     {
         $gender = Auth::user()->gender;
-        $age = $request->age;
+        $age = Carbon::parse(Auth::user()->date_of_birth)->age;
         $height = $request->height;
         $weight = $request->weight;
 

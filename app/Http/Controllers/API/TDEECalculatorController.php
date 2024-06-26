@@ -4,7 +4,9 @@ namespace App\Http\Controllers\API;
 
 use App\Helpers\ResponseFormatter;
 use App\Http\Controllers\Controller;
+use App\Models\TDEECalculator;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class TDEECalculatorController extends Controller
 {
@@ -16,11 +18,11 @@ class TDEECalculatorController extends Controller
      */
     public function index(Request $request)
     {
-        $age = $request->age;
-        $gender = $request->gender;
+        // $age = $request->age;
+        $gender = Auth::user()->gender;
         $weight = $request->weight;
         $height = $request->height;
-        $daily = $request->daily;
+        // $daily = $request->daily;
         $activity = $request->activity;
 
         $activityWeekly ='';
@@ -53,14 +55,19 @@ class TDEECalculatorController extends Controller
 
         if ($gender == 'Laki-laki') {
             $result = ($height * 6.25) + ($weight * 9.99) + 5 * $activityWeekly;
+        } else if ($gender = 'Perempuan') {
+            $result = ($height * 6.25) + ($weight * 9.99) + 5 * $activityWeekly;
         } else {
-$result = ($height * 6.25) + ($weight * 9.99) + 5 * $activityWeekly;
+            throw "error";
         }
 
 
         $data = [
             'result' => $result,
+            'user_id' => Auth::user()->id,
         ];
+
+        TDEECalculator::create($data);
 
         return ResponseFormatter::success($data, 'Kalkulasi TDEE Calculator Success');
     }

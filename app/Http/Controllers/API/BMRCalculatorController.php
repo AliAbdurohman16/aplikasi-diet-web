@@ -6,6 +6,7 @@ use App\Helpers\ResponseFormatter;
 use App\Http\Controllers\Controller;
 use App\Models\BMRCalculator;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class BMRCalculatorController extends Controller
 {
@@ -17,10 +18,11 @@ class BMRCalculatorController extends Controller
      */
     public function index(Request $request)
     {
-        $gender = $request->gender;
+        $gender = Auth::user()->gender;
         $age = $request->age;
         $height = $request->height;
         $weight = $request->weight;
+
 
         $result = '';
 
@@ -32,11 +34,12 @@ class BMRCalculatorController extends Controller
             $result = 655 + (9.6 + $weight) + (1.8 * $height) - (4.7 - $age);
         }
 
-        BMRCalculator::create($result);
 
         $data = [
             'result' => $result,
+            'user_id' => Auth::user()->id,
         ];
+        BMRCalculator::create($data);
 
 
         return ResponseFormatter::success($result, 'Data berhasil ditambahkan!');

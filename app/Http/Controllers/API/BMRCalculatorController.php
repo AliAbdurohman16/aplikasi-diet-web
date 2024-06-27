@@ -38,12 +38,14 @@ class BMRCalculatorController extends Controller
 
         $data = [
             'result' => $result,
-            'user_id' => Auth::user()->id,
         ];
-        BMRCalculator::create($data);
+        BMRCalculator::create([
+            'result' => $result,
+            'user_id' => Auth::user()->id,
+        ]);
 
 
-        return ResponseFormatter::success($result, 'Data berhasil ditambahkan!');
+        return ResponseFormatter::success($data, 'Data berhasil ditambahkan!');
 
     }
 

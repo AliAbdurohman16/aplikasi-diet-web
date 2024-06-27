@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Anthropometry;
 use Illuminate\Http\Request;
 use App\Helpers\ResponseFormatter;
+use Illuminate\Support\Facades\Auth;
 
 class AnthropometryController extends Controller
 {
@@ -45,7 +46,10 @@ class AnthropometryController extends Controller
 
         Anthropometry::create([
             'result' => $result,
-            'imt' => $imt
+            'imt' => $imt,
+            'weight' => $weight,
+            'height' => $height,
+            'user_id' => Auth::user()->id,
         ]);
 
         return ResponseFormatter::success($data, 'Kalkulasi IMT berhasil!');

@@ -29,14 +29,16 @@ class BMRCalculatorController extends Controller
 
 
         if ($gender == 'Laki-laki') {
-            $result = 66.5 + (13.7 + $weight) + (5 * $height) - (6.8 - $age);
+            $result = (10 * $weight) + (6.25 * $height) - (5 * $age) + 5;
 
         } else {
-            $result = 655 + (9.6 + $weight) + (1.8 * $height) - (4.7 - $age);
+            $result = (10 * $weight) + (6.25 * $height) - (5 * $age) - 161;
         }
 
 
         $data = [
+            'weight' => $weight,
+            'height' => $height,
             'result' => $result,
         ];
         BMRCalculator::create([

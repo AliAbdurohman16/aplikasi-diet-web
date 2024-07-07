@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Helpers\ResponseFormatter;
 use App\Http\Controllers\Controller;
+use App\Models\BMRCalculator;
 use App\Models\TDEECalculator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -18,31 +19,28 @@ class TDEECalculatorController extends Controller
      */
     public function index(Request $request)
     {
-        // $age = $request->age;
-        $gender = Auth::user()->gender;
-        $weight = $request->weight;
-        $height = $request->height;
-        // $daily = $request->daily;
+
         $activity = $request->activity;
+        $bmr = BMRCalculator::where('user_id', Auth::user()->id)->latest()->first();
 
         $activityWeekly ='';
         $result = '';
 
 
         switch ($activity){
-            case 'office':
+            case 'Minimal':
                 $activityWeekly = 1.2;
                 break;
-            case 'light' :
+            case 'Ringan':
                 $activityWeekly = 1.375;
                     break;
-            case 'moderate':
+            case 'Sedang':
                 $activityWeekly = 1.55;
                 break;
-            case 'heavy':
+            case 'Berat':
                 $activityWeekly = 1.725;
                 break;
-            case 'veryheavy':
+            case 'Ekstra Berat':
                 $activityWeekly = 1.9;
                 break;
             default:
@@ -52,14 +50,7 @@ class TDEECalculatorController extends Controller
 
 
 
-
-        if ($gender == 'Laki-laki') {
-            $result = ($height * 6.25) + ($weight * 9.99) + 5 * $activityWeekly;
-        } else if ($gender = 'Perempuan') {
-            $result = ($height * 6.25) + ($weight * 9.99) + 5 * $activityWeekly;
-        } else {
-            throw "error";
-        }
+        $result = $bmr->result * $activityWeekly;
 
 
         $data = [

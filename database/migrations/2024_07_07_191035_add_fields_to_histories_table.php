@@ -13,9 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('sports', function (Blueprint $table) {
-            $table->double('duration')->after('name')->nullable();
-            $table->string('calories_minutes')->after('duration')->nullable();
+        Schema::table('histories', function (Blueprint $table) {
+            $table->string('duration')->after('fat');
         });
     }
 
@@ -26,7 +25,7 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('sports', function (Blueprint $table) {
+        Schema::table('histories', function (Blueprint $table) {
         });
     }
 };

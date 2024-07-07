@@ -14,10 +14,6 @@ return new class extends Migration
     public function up()
     {
         Schema::table('sports', function (Blueprint $table) {
-            $table->dropColumn('five_minute_calories');
-            $table->dropColumn('fifteen_minute_calories');
-            $table->dropColumn('thirty_minute_calories');
-            $table->dropColumn('one_hour_calories');
             $table->double('duration')->after('name');
             $table->string('calories_minutes')->after('duration');
         });

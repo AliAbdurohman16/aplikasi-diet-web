@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\History;
 use Carbon\Carbon;
 use App\Helpers\ResponseFormatter;
+use Illuminate\Support\Facades\Auth;
 
 class ReportController extends Controller
 {
@@ -23,7 +24,9 @@ class ReportController extends Controller
             $date = $lastWeek->addDay();
 
             // Retrieve data from database based on date
-            $histories = History::whereDate('created_at', $date->toDateString())->get();
+            $histories = History::where('user_id', Auth::user()->id)
+
+                ->whereDate('created_at', $date->toDateString())->get();
 
             // Convert calories to integers
             $histories->transform(function ($history) {
@@ -119,19 +122,19 @@ class ReportController extends Controller
     public function show()
     {
         // Get where category breakfast
-        $breakfast = History::where('category', 'Makan Pagi')->whereDate('created_at', now()->toDateString())->orderBy('created_at', 'asc')->get();
+        $breakfast = History::where('category', 'Makan Pagi')->where('user_id', Auth::user()->id)->whereDate('created_at', now()->toDateString())->orderBy('created_at', 'asc')->get();
 
         // Get where category lunch
-        $lunch = History::where('category', 'Makan Siang')->whereDate('created_at', now()->toDateString())->orderBy('created_at', 'asc')->get();
+        $lunch = History::where('category', 'Makan Siang')->where('user_id', Auth::user()->id)->whereDate('created_at', now()->toDateString())->orderBy('created_at', 'asc')->get();
 
         // Get where category dinner
-        $dinner = History::where('category', 'Makan Malam')->whereDate('created_at', now()->toDateString())->orderBy('created_at', 'asc')->get();
+        $dinner = History::where('category', 'Makan Malam')->where('user_id', Auth::user()->id)->whereDate('created_at', now()->toDateString())->orderBy('created_at', 'asc')->get();
 
         // Get where category snack
-        $snack = History::where('category', 'Cemilan')->whereDate('created_at', now()->toDateString())->orderBy('created_at', 'asc')->get();
+        $snack = History::where('category', 'Cemilan')->where('user_id', Auth::user()->id)->whereDate('created_at', now()->toDateString())->orderBy('created_at', 'asc')->get();
 
         // Get where category drink
-        $drink = History::where('category', 'Minuman')->whereDate('created_at', now()->toDateString())->orderBy('created_at', 'asc')->get();
+        $drink = History::where('category', 'Minuman')->where('user_id', Auth::user()->id)->whereDate('created_at', now()->toDateString())->orderBy('created_at', 'asc')->get();
 
         $data = [
             'breakfast' => $breakfast,

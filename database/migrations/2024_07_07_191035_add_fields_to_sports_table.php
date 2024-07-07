@@ -14,8 +14,8 @@ return new class extends Migration
     public function up()
     {
         Schema::table('sports', function (Blueprint $table) {
-            $table->double('duration')->after('name');
-            $table->string('calories_minutes')->after('duration');
+            $table->double('duration')->after('name')->nullable();
+            $table->string('calories_minutes')->after('duration')->nullable();
         });
     }
 

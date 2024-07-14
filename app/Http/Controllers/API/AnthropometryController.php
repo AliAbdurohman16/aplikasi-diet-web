@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Anthropometry;
 use Illuminate\Http\Request;
 use App\Helpers\ResponseFormatter;
+use App\Models\History;
 use Illuminate\Support\Facades\Auth;
 
 class AnthropometryController extends Controller
@@ -44,11 +45,19 @@ class AnthropometryController extends Controller
 
 
 
-        Anthropometry::create([
-            'result' => $result,
-            'imt' => $imt,
+        History::create([
+            'result_bmi' => $result,
+            'result_bmr' => '0',
             'weight' => $weight,
             'height' => $height,
+            'imt' => $imt,
+            'name' => 'BMI Kalkulator',
+            'duration' => '0',
+            'calories' => '0',
+            'category' => 'BMI',
+            'protein' => '0',
+            'fat' => '0',
+            'carbohydrates' => '0',
             'user_id' => Auth::user()->id,
         ]);
 

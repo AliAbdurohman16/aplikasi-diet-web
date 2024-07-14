@@ -138,6 +138,10 @@ class ReportController extends Controller
 
         $sports = History::where('category', 'Olahraga')->where('user_id', Auth::user()->id)->whereDate('created_at', now()->toDateString())->orderBy('created_at', 'asc')->get();
 
+        $bmr = History::where('category', 'BMR')->where('user_id', Auth::user()->id)->whereDate('created_at', now()->toDateString())->orderBy('created_at', 'asc')->get();
+
+        $bmi = History::where('category', 'BMI')->where('user_id', Auth::user()->id)->whereDate('created_at', now()->toDateString())->orderBy('created_at', 'asc')->get();
+
         $data = [
             'breakfast' => $breakfast,
             'lunch' => $lunch,
@@ -145,7 +149,8 @@ class ReportController extends Controller
             'snack' => $snack,
             'drink' => $drink,
             'sports' => $sports,
-
+            'bmi' => $bmi,
+            'bmr' => $bmr
         ];
 
         return ResponseFormatter::success($data, 'Data berhasil ditampilkan!');

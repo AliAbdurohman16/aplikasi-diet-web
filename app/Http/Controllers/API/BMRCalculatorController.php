@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Helpers\ResponseFormatter;
 use App\Http\Controllers\Controller;
 use App\Models\BMRCalculator;
+use App\Models\History;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -69,8 +70,20 @@ class BMRCalculatorController extends Controller
         $data = [
             'result' => $result,
         ];
-        BMRCalculator::create([
-            'result' => $result,
+
+        History::create([
+            'result_bmi' => '0',
+            'result_bmr' => $result,
+            'weight' => $weight,
+            'height' => $height,
+            'imt' => '0',
+            'name' => 'BMR dan TDEE Kalkulator',
+            'duration' => '0',
+            'calories' => '0',
+            'category' => 'BMR',
+            'protein' => '0',
+            'fat' => '0',
+            'carbohydrates' => '0',
             'user_id' => Auth::user()->id,
         ]);
 

@@ -33,6 +33,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('sports', [API\SportController::class, 'store']);
     Route::get('educations', [API\EducationController::class, 'index']);
     Route::get('anthropometry', [API\AnthropometryController::class, 'index']);
+    Route::get('anthropometry/show', [API\AnthropometryController::class, 'show']);
     Route::get('report', [API\ReportController::class, 'index']);
     Route::get('report/show', [API\ReportController::class, 'show']);
     Route::get('consultations', [API\ConsultationController::class, 'index']);
@@ -44,5 +45,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::put('profile', [API\ProfileController::class, 'update']);
     Route::post('logout', [API\AuthController::class, 'logout']);
     Route::get('bmr', [API\BMRCalculatorController::class, 'index']);
+    Route::get('bmr/show', [API\BMRCalculatorController::class, 'show']);
+
     Route::get('tdee', [API\TDEECalculatorController::class, 'index']);
 });

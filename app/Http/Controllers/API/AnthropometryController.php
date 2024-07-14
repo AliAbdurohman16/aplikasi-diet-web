@@ -55,11 +55,18 @@ class AnthropometryController extends Controller
         return ResponseFormatter::success($data, 'Kalkulasi IMT berhasil!');
     }
 
-
-    public function store(Request $request)
+    public function show()
     {
-        $data = $request->all();
+        $anthropometry = Anthropometry::where('user_id', Auth::user()->id)->whereDate('created_at', now()->toDateString())->orderBy('created_at', 'asc')->get();
 
-
+        return ResponseFormatter::success($anthropometry, 'Data IMT berhasil diambil');
     }
+
+
+    // public function store(Request $request)
+    // {
+    //     $data = $request->all();
+
+
+    // }
 }

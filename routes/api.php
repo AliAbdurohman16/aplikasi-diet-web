@@ -30,6 +30,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('drinks', [API\DrinkController::class, 'index']);
     Route::post('drinks', [API\DrinkController::class, 'store']);
     Route::get('sports', [API\SportController::class, 'index']);
+    Route::post('sports', [API\SportController::class, 'store']);
     Route::get('educations', [API\EducationController::class, 'index']);
     Route::get('anthropometry', [API\AnthropometryController::class, 'index']);
     Route::get('report', [API\ReportController::class, 'index']);

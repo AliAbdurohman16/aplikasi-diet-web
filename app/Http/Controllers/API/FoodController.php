@@ -35,6 +35,7 @@ class FoodController extends Controller
                     'carbohydrates' => $food->carbohydrate,
                     'protein' => $food->proteins,
                     'fat' => $food->fat,
+                    'duration' => '0'
                 ]);
             }
         }

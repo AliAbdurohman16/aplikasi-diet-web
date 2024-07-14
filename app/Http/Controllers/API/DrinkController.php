@@ -35,6 +35,7 @@ class DrinkController extends Controller
                     'carbohydrates' => $drink->carbohydrate,
                     'protein' => $drink->proteins,
                     'fat' => $drink->fat,
+                    'duration' => '0'
                 ]);
             }
         }

@@ -25,7 +25,7 @@ class SportController extends Controller
             'user_id' => Auth::user()->id,
             'name' => $request->name,
             'duration' => $request->duration,
-            'calories' => $request->calories,
+            'calories' => '0',
             'category' => $request->category,
             'protein' => '0',
             'fat' => '0',

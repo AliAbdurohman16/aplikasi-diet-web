@@ -136,12 +136,16 @@ class ReportController extends Controller
         // Get where category drink
         $drink = History::where('category', 'Minuman')->where('user_id', Auth::user()->id)->whereDate('created_at', now()->toDateString())->orderBy('created_at', 'asc')->get();
 
+        $sports = History::where('category', 'Olahraga')->where('user_id', Auth::user()->id)->whereDate('created_at', now()->toDateString())->orderBy('created_at', 'asc')->get();
+
         $data = [
             'breakfast' => $breakfast,
             'lunch' => $lunch,
             'dinner' => $dinner,
             'snack' => $snack,
             'drink' => $drink,
+            'sports' => $sports,
+
         ];
 
         return ResponseFormatter::success($data, 'Data berhasil ditampilkan!');

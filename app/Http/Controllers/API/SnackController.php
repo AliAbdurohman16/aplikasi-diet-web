@@ -35,6 +35,7 @@ class SnackController extends Controller
                     'carbohydrates' => $snack->carbohydrate,
                     'protein' => $snack->proteins,
                     'fat' => $snack->fat,
+                    'duration' => '0'
                 ]);
             }
         }

@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('histories', function (Blueprint $table) {
-            $table->string('duration')->after('fat')->nullable();
+            $table->string('duration')->after('fat')->nullable()->default(0);
         });
     }
 
